@@ -1,0 +1,204 @@
+@import "tailwindcss";
+
+/* Tokens serious.business */
+:root {
+  --tinta: #1e1e1e;
+  --papel: #ffffff;
+  --crema: #fcf8ec;
+  --ecru: #f0e8db;
+  --rosa: #fbc1d4;
+  --rosa-fuerte: #ff7ec4;
+  --amarillo: #fed35b;
+  --lila: #c3abff;
+  --celeste: #d2d2fb;
+  --menta: #aef6c6;
+  --exito: #48b469;
+  --peligro: #fe0000;
+  --mudo: #afafaf;
+  --filete: rgba(30, 30, 30, 0.18);
+  --filete-suave: rgba(30, 30, 30, 0.1);
+  --fondo: var(--papel);
+  --ease-suave: cubic-bezier(0.45, 0, 0.55, 1);
+  --ease-salida: cubic-bezier(0.25, 1, 0.5, 1);
+  --hover: 0.3s;
+  --padding-global: 1.25rem;
+}
+
+/* Root fluido, el truco de serious.business */
+html { font-size: 4.2666666667vw; }
+@media (min-width: 600px) {
+  html { font-size: 1.5625vw; }
+  :root { --padding-global: 2.5rem; }
+}
+@media (min-width: 1025px) {
+  html { font-size: min(0.8333333333vw, calc(0.8333333333vh * 2.3)); }
+  :root { --padding-global: 2rem; }
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("./fuentes/Satoshi-Variable.woff2") format("woff2");
+  font-weight: 300 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("./fuentes/Satoshi-VariableItalic.woff2") format("woff2");
+  font-weight: 300 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+body {
+  background: var(--fondo);
+  color: var(--tinta);
+  font-family: "Satoshi", "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.4;
+  letter-spacing: -0.015rem;
+  margin: 0;
+  transition: background 0.5s var(--ease-suave);
+  min-height: 100dvh;
+}
+
+/* Fondos pastel por módulo */
+.fondo--papel { --fondo: var(--papel); }
+.fondo--crema { --fondo: var(--crema); }
+.fondo--ecru { --fondo: var(--ecru); }
+.fondo--rosa { --fondo: var(--rosa); }
+.fondo--lila { --fondo: var(--lila); }
+.fondo--celeste { --fondo: var(--celeste); }
+.fondo--menta { --fondo: var(--menta); }
+
+main { padding: 0 var(--padding-global) 6rem; max-width: 90rem; margin: 0 auto; }
+
+/* Titular mixto: sans 600 + una palabra en serif itálica */
+.titulo {
+  font-weight: 600;
+  font-size: 3rem;
+  line-height: 1;
+  letter-spacing: -0.09rem;
+  margin: 3rem 0 0.75rem;
+}
+@media (min-width: 1025px) { .titulo { font-size: 4rem; letter-spacing: -0.12rem; } }
+.titulo em, .serif {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+.titulo .atenuado { color: var(--mudo); }
+.bajada { color: var(--tinta); opacity: 0.65; max-width: 31rem; margin: 0 0 3rem; }
+
+/* Nav */
+.nav {
+  display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap;
+  padding: 1.25rem var(--padding-global);
+  font-size: 0.875rem; font-weight: 600;
+}
+.nav a { color: var(--tinta); text-decoration: none; position: relative; padding-bottom: 2px; }
+.nav a::after {
+  content: ""; position: absolute; left: 0; bottom: 0; height: 1.5px;
+  width: 0; background: var(--tinta); transition: width 1s var(--ease-salida);
+}
+.nav a:hover::after, .nav a[aria-current="page"]::after { width: 100%; }
+.nav .marca { font-size: 1rem; letter-spacing: -0.03rem; margin-right: auto; }
+.nav .marca em { font-family: var(--font-serif), Georgia, serif; font-style: italic; font-weight: 400; }
+
+/* Pills y botones */
+.pill {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  border-radius: 100vmax; border: 1px solid var(--filete);
+  background: transparent; color: var(--tinta);
+  height: 2.375rem; padding: 0 1.125rem;
+  font: inherit; font-size: 0.875rem; font-weight: 600;
+  cursor: pointer; text-decoration: none;
+  transition: background var(--hover) var(--ease-suave), color var(--hover) var(--ease-suave),
+    border-color var(--hover) var(--ease-suave), transform var(--hover) var(--ease-salida);
+}
+.pill:hover { background: var(--tinta); color: var(--fondo); border-color: var(--tinta); }
+.pill--primaria { background: var(--tinta); color: #fff; border-color: var(--tinta); }
+.pill--primaria:hover { background: var(--rosa-fuerte); border-color: var(--rosa-fuerte); color: var(--tinta); }
+.pill--activa { background: var(--tinta); color: #fff; border-color: var(--tinta); }
+.pill--mini { height: 1.75rem; padding: 0 0.75rem; font-size: 0.75rem; }
+
+/* Cards */
+.card {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--filete-suave);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+}
+.card--destacada { border-radius: 1rem; background: #fff; }
+
+/* KPI: número enorme, micro-label en la única mayúscula del sistema */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: 1.25rem; margin: 0 0 2rem; }
+.kpi b {
+  display: block; font-size: 2.5rem; font-weight: 600; line-height: 1;
+  letter-spacing: -0.06rem; font-variant-numeric: tabular-nums;
+}
+.kpi span {
+  font-size: 0.688rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--mudo);
+}
+
+/* Tablas */
+.tabla { width: 100%; border-collapse: collapse; font-size: 0.938rem; }
+.tabla th {
+  text-align: left; font-size: 0.688rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--mudo); padding: 0.625rem 0.75rem;
+  border-bottom: 1px solid var(--filete);
+}
+.tabla td { padding: 0.75rem; border-bottom: 1px solid var(--filete-suave); }
+.tabla tr { transition: background var(--hover) var(--ease-suave); }
+.tabla tbody tr:hover { background: rgba(255, 255, 255, 0.6); }
+.tabla .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* Estados como pills pequeñas */
+.estado { border-radius: 100vmax; padding: 0.2rem 0.7rem; font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
+.estado--ok { background: var(--menta); }
+.estado--alerta { background: var(--amarillo); }
+.estado--riesgo { background: var(--rosa); }
+.estado--info { background: var(--celeste); }
+.estado--neutro { background: var(--ecru); }
+
+/* Formularios */
+.formulario { display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); align-items: end; }
+.campo { display: grid; gap: 0.25rem; font-size: 0.75rem; font-weight: 600; }
+.campo input, .campo select, .campo textarea {
+  font: inherit; font-size: 0.938rem; font-weight: 400; color: var(--tinta);
+  background: rgba(255, 255, 255, 0.7); border: 1px solid var(--filete);
+  border-radius: 0.5rem; height: 2.75rem; padding: 0 0.875rem; outline: none;
+  transition: border-color var(--hover) var(--ease-suave);
+}
+.campo textarea { height: auto; padding: 0.625rem 0.875rem; }
+.campo input:focus, .campo select:focus, .campo textarea:focus { border-color: var(--tinta); }
+
+/* Filtros vivos */
+.filtros { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; margin: 0 0 1.25rem; }
+.filtros .contador { font-size: 0.75rem; color: var(--mudo); margin-left: auto; }
+.buscador {
+  font: inherit; font-size: 0.875rem; border: 1px solid var(--filete); border-radius: 100vmax;
+  height: 2.375rem; padding: 0 1.125rem; background: rgba(255,255,255,0.7); outline: none; min-width: 14rem;
+}
+
+/* Reveal de entrada */
+@keyframes revelar {
+  from { clip-path: inset(18% round 0.5rem); opacity: 0.4; transform: translateY(0.5rem); }
+  to { clip-path: inset(0 round 0.5rem); opacity: 1; transform: none; }
+}
+.revelar { animation: revelar 0.75s var(--ease-salida) both; }
+.revelar:nth-child(2) { animation-delay: 0.08s; }
+.revelar:nth-child(3) { animation-delay: 0.16s; }
+.revelar:nth-child(4) { animation-delay: 0.24s; }
+.revelar:nth-child(5) { animation-delay: 0.32s; }
+.revelar:nth-child(6) { animation-delay: 0.4s; }
+
+.grilla { display: grid; gap: 1.25rem; }
+@media (min-width: 600px) { .grilla--2 { grid-template-columns: 1fr 1fr; } .grilla--3 { grid-template-columns: 1fr 1fr 1fr; } }
+
+a.enlace { color: inherit; text-decoration: underline; text-decoration-color: var(--filete); transition: text-decoration-color var(--hover); }
+a.enlace:hover { text-decoration-color: var(--tinta); }
+.meta { font-size: 0.75rem; color: var(--mudo); }
+.vacio { padding: 3rem 0; color: var(--mudo); font-size: 1.125rem; }
+.vacio em { font-family: var(--font-serif), Georgia, serif; font-style: italic; }
