@@ -69,6 +69,7 @@ body {
 .fondo--lila { --fondo: var(--lila); }
 .fondo--celeste { --fondo: var(--celeste); }
 .fondo--menta { --fondo: var(--menta); }
+.fondo--amarillo { --fondo: var(--amarillo); }
 
 main { padding: 0 var(--padding-global) 6rem; max-width: 90rem; margin: 0 auto; }
 
@@ -202,3 +203,4 @@ a.enlace:hover { text-decoration-color: var(--tinta); }
 .meta { font-size: 0.75rem; color: var(--mudo); }
 .vacio { padding: 3rem 0; color: var(--mudo); font-size: 1.125rem; }
 .vacio em { font-family: var(--font-serif), Georgia, serif; font-style: italic; }
+
