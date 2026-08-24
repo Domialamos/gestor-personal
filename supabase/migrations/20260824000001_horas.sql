@@ -37,12 +37,35 @@ create unique index if not exists horas_una_corriendo
 create index if not exists horas_estado_inicio
   on public.horas (user_id, estado, inicio desc);
 
+-- Una hora ya cargada en TimeBilling es terminal: la base de datos lo exige
+-- porque el puente local escribe directo con supabase-js y no siempre pasa
+-- por transicionValida() de lib/horas.ts.
+create or replace function public.horas_cargada_es_terminal()
+returns trigger
+language plpgsql
+as $$
+begin
+  if old.estado = 'cargada' and new.estado is distinct from old.estado then
+    raise exception 'Una hora ya cargada en TimeBilling no cambia de estado.';
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists horas_cargada_es_terminal on public.horas;
+
+create trigger horas_cargada_es_terminal
+  before update on public.horas
+  for each row
+  execute function public.horas_cargada_es_terminal();
+
 -- RLS: solo la dueña ve y toca sus filas (mismo patrón que el esquema inicial)
 do $$
 declare t text;
 begin
   foreach t in array array['horas','tb_proyectos'] loop
     execute format('alter table public.%I enable row level security', t);
+    execute format('drop policy if exists "propietaria_%1$s" on public.%1$I', t);
     execute format($f$
       create policy "propietaria_%1$s" on public.%1$I
         for all using (user_id = auth.uid()) with check (user_id = auth.uid())
