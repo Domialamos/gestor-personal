@@ -20,11 +20,13 @@ Tokens en `app/globals.css`. Fondos por módulo:
 | Trabajo | `--hielo` | `#d9e5ef` | calendario |
 | Trabajo | `--arena` | `#ece3cf` | horas |
 | Trabajo | `--piedra` | `#e5e1d6` | legal |
-| Personal | `--marfil` | `#f5eee1` | hub / ingresar |
-| Personal | `--durazno` | `#f6dcc4` | actualidad |
-| Personal | `--barro` | `#f0cfc2` | cuentas |
-| Personal | `--salvia` | `#d8e5d0` | gastos |
-| Personal | `--glicina` | `#e2d8ee` | reembolsos |
+| Personal | `--marfil` | `#faeef3` | hub / ingresar |
+| Personal | `--durazno` | `#f8dbe6` | actualidad |
+| Personal | `--barro` | `#f4c8d9` | cuentas |
+| Personal | `--salvia` | `#fce4dd` | gastos |
+| Personal | `--glicina` | `#eed4e8` | reembolsos |
+
+La familia Personal es rosada (pedido del 24-08-2026): acento `#d1477e`; `--menta` queda fijo en verde `#d8e5d0` para los estados ok.
 
 Cada clase `fondo--*` fija además `--acento` (azul o terracota); los botones primarios lo usan en hover. Los tokens antiguos (`--crema`, `--rosa`, `--menta`, …) quedan como alias de los nuevos, así los `estado--*` y cualquier uso previo siguen funcionando.
 

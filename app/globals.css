@@ -12,13 +12,13 @@
   --piedra: #e5e1d6;   /* radar legal */
   --acento-trabajo: #2b5aa0;
 
-  /* Familia Personal (cálida) */
-  --marfil: #f5eee1;   /* hub personal */
-  --durazno: #f6dcc4;  /* actualidad */
-  --barro: #f0cfc2;    /* cuentas */
-  --salvia: #d8e5d0;   /* gastos */
-  --glicina: #e2d8ee;  /* reembolsos */
-  --acento-personal: #c25a32;
+  /* Familia Personal (rosada) */
+  --marfil: #faeef3;   /* hub personal — rosa empolvado */
+  --durazno: #f8dbe6;  /* actualidad — rosa claro */
+  --barro: #f4c8d9;    /* cuentas — rosa medio */
+  --salvia: #fce4dd;   /* gastos — rosa coral pálido */
+  --glicina: #eed4e8;  /* reembolsos — malva rosado */
+  --acento-personal: #d1477e;
 
   /* Alias de la paleta anterior, remapeados a los tonos nuevos */
   --crema: var(--marfil);
@@ -28,7 +28,7 @@
   --amarillo: var(--arena);
   --lila: var(--glicina);
   --celeste: var(--hielo);
-  --menta: var(--salvia);
+  --menta: #d8e5d0; /* verde de estados ok, independiente de la familia rosada */
 
   --exito: #3d8f5f;
   --peligro: #c8321f;
