@@ -9,7 +9,7 @@ export default async function Horas() {
   const { data: filas } = await supabase
     .from("horas").select("*").order("inicio", { ascending: false }).limit(500);
   const { data: proyectos } = await supabase
-    .from("tb_proyectos").select("proyecto_id, nombre, cliente").eq("activo", true).order("nombre");
+    .from("tb_proyectos").select("proyecto_id, nombre, cliente").eq("activo", true).order("nombre").limit(3000);
 
   const todas = (filas ?? []) as Hora[];
   const corriendo = todas.find((f) => f.estado === "corriendo") ?? null;
