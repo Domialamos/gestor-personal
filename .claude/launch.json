@@ -3,7 +3,7 @@
   "configurations": [
     {
       "name": "gestor-personal",
-      "runtimeExecutable": "/Users/domialamos/.local/node/bin/npm",
+      "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev", "--", "-p", "3987"],
       "port": 3987
     }
