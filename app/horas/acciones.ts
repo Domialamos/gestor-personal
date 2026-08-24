@@ -88,14 +88,22 @@ export async function actualizarHora(id: string, datos: FormData) {
   const duracionMin = minutos !== null && Number.isFinite(minutos) && minutos > 0
     ? Math.max(DECIMA_MIN, redondearDecima(minutos))
     : null;
-  const { error } = await supabase.from("horas").update({
-    proyecto_id: proyecto ? Number(proyecto) : null,
-    duracion_min: duracionMin,
-    tipo_trabajo: String(datos.get("tipo_trabajo") || "general"),
-    descripcion: String(datos.get("descripcion") || ""),
-    facturable: datos.get("facturable") === "on",
-  }).eq("id", id).in("estado", ["borrador", "aprobada", "error"]);
+  const { data: actualizadas, error } = await supabase
+    .from("horas")
+    .update({
+      proyecto_id: proyecto ? Number(proyecto) : null,
+      duracion_min: duracionMin,
+      tipo_trabajo: String(datos.get("tipo_trabajo") || "general"),
+      descripcion: String(datos.get("descripcion") || ""),
+      facturable: datos.get("facturable") === "on",
+    })
+    .eq("id", id)
+    .in("estado", ["borrador", "aprobada", "error"])
+    .select("id");
   if (error) throw new Error(error.message);
+  if (!actualizadas || actualizadas.length === 0) {
+    throw new Error("Esta hora ya se cargó en TimeBilling; no se puede editar.");
+  }
   revalidatePath("/horas");
 }
 
@@ -121,8 +129,15 @@ export async function desaprobarHora(id: string) {
 
 export async function eliminarHora(id: string) {
   const supabase = await clienteServidor();
-  const { error } = await supabase
-    .from("horas").delete().eq("id", id).in("estado", ["borrador", "error"]);
+  const { data: eliminadas, error } = await supabase
+    .from("horas")
+    .delete()
+    .eq("id", id)
+    .in("estado", ["borrador", "error"])
+    .select("id");
   if (error) throw new Error(error.message);
+  if (!eliminadas || eliminadas.length === 0) {
+    throw new Error("Esta hora ya está aprobada o cargada en TimeBilling; no se puede borrar.");
+  }
   revalidatePath("/horas");
 }
