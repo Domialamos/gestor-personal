@@ -7,8 +7,9 @@ import "dotenv/config";
 import readline from "node:readline/promises";
 import { existsSync, readFileSync, writeFileSync, unlinkSync } from "node:fs";
 
-const { TB_URL, SUPABASE_URL, SUPABASE_ANON_KEY, GESTOR_EMAIL, GESTOR_PASSWORD } = process.env;
-for (const [nombre, valor] of Object.entries({ TB_URL, SUPABASE_URL, SUPABASE_ANON_KEY, GESTOR_EMAIL, GESTOR_PASSWORD })) {
+const { TB_URL, SUPABASE_URL, SUPABASE_ANON_KEY, GESTOR_EMAIL, GESTOR_PASSWORD,
+        TB_ID_USUARIO, TB_ID_CATEGORIA } = process.env;
+for (const [nombre, valor] of Object.entries({ TB_URL, SUPABASE_URL, SUPABASE_ANON_KEY, GESTOR_EMAIL, GESTOR_PASSWORD, TB_ID_USUARIO })) {
   if (!valor) { console.error(`Falta ${nombre} en puente/.env`); process.exit(1); }
 }
 
@@ -42,7 +43,19 @@ const { data: filas, error } = await supabase
 if (error) { console.error(error.message); process.exit(1); }
 if (!filas.length) { console.log("No hay horas aprobadas por cargar."); process.exit(0); }
 
-const horas = filas.map((f) => ({ ...f, fecha_local: fechaLocalChile(f.inicio) }));
+// El asunto de TimeBilling es un código de texto (tb_proyectos.codigo).
+const { data: proyectos, error: errorProyectos } = await supabase
+  .from("tb_proyectos").select("proyecto_id, codigo, nombre");
+if (errorProyectos) { console.error(errorProyectos.message); process.exit(1); }
+const codigoDe = new Map((proyectos ?? []).map((p) => [p.proyecto_id, p.codigo]));
+
+const horas = filas.map((f) => ({
+  ...f,
+  fecha_local: fechaLocalChile(f.inicio),
+  codigo_asunto: codigoDe.get(f.proyecto_id) ?? null,
+  id_usuario: TB_ID_USUARIO,
+  id_categoria_usuario: TB_ID_CATEGORIA ?? "",
+}));
 
 console.log(`\n${horas.length} hora(s) por cargar:\n`);
 for (const h of horas) {
@@ -57,12 +70,11 @@ if (!process.argv.includes("--si")) {
   if (respuesta.trim().toLowerCase() !== "si") { console.log("Cancelado."); process.exit(0); }
 }
 
-// El transporte lo decide descubrimiento; ver puente/README.md sección Transporte.
-const { enviar } = existsSync("descubierto.json") &&
-  JSON.parse(readFileSync("descubierto.json", "utf8")).some(
-    (r) => (r.cabeceras["content-type"] ?? "").includes("json") || (r.cuerpo ?? "").trim().startsWith("{"))
-  ? await import("./transporte/xhr.mjs")
-  : await import("./transporte/ui.mjs");
+// El descubrimiento del 24-08-2026 confirmó el endpoint JSON interno; el
+// transporte XHR es el titular. TRANSPORTE=ui en .env fuerza el de respaldo.
+const { enviar } = process.env.TRANSPORTE === "ui"
+  ? await import("./transporte/ui.mjs")
+  : await import("./transporte/xhr.mjs");
 
 const contexto = await chromium.launchPersistentContext("./perfil", { headless: false });
 const pagina = contexto.pages()[0] ?? (await contexto.newPage());

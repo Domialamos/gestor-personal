@@ -121,7 +121,7 @@ export function TablaHoras({ filas, proyectos, pulidoDisponible }: {
               </label>
               <label className="campo">
                 Minutos
-                <input name="duracion_min" type="number" min="6" step="6" defaultValue={f.duracion_min ?? 6} />
+                <input name="duracion_min" type="number" min="5" step="5" defaultValue={f.duracion_min ?? 5} />
               </label>
               <label className="campo" style={{ gridColumn: "1 / -1" }}>
                 Descripción

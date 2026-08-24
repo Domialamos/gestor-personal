@@ -1,21 +1,21 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { redondearDecima, transicionValida, fechaLocalChile, minutosEntre } from "./horas";
+import { redondearPaso, transicionValida, fechaLocalChile, minutosEntre } from "./horas";
 
-test("redondearDecima sube al múltiplo de 6 más cercano hacia arriba", () => {
-  assert.equal(redondearDecima(1), 6);
-  assert.equal(redondearDecima(6), 6);
-  assert.equal(redondearDecima(7), 12);
-  assert.equal(redondearDecima(60), 60);
-  assert.equal(redondearDecima(61), 66);
+test("redondearPaso sube al múltiplo de 5 más cercano hacia arriba", () => {
+  assert.equal(redondearPaso(1), 5);
+  assert.equal(redondearPaso(5), 5);
+  assert.equal(redondearPaso(6), 10);
+  assert.equal(redondearPaso(60), 60);
+  assert.equal(redondearPaso(61), 65);
 });
 
-test("redondearDecima nunca devuelve cero para trabajo real", () => {
-  assert.equal(redondearDecima(0.1), 6);
+test("redondearPaso nunca devuelve cero para trabajo real", () => {
+  assert.equal(redondearPaso(0.1), 5);
 });
 
-test("redondearDecima devuelve 0 solo para 0", () => {
-  assert.equal(redondearDecima(0), 0);
+test("redondearPaso devuelve 0 solo para 0", () => {
+  assert.equal(redondearPaso(0), 0);
 });
 
 test("transicionValida acepta el camino feliz", () => {

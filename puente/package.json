@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "configurar": "node configurar.mjs",
+    "sincronizar": "node sincronizar-asuntos.mjs",
     "descubrir": "node descubrir.mjs",
     "cargar": "node cargar.mjs"
   },

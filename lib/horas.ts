@@ -1,16 +1,18 @@
-// Lógica pura del módulo de horas: redondeo a décimas, transiciones de estado
-// y fechas en hora de Chile. Sin I/O, para poder probarlo directo.
+// Lógica pura del módulo de horas: redondeo al paso de TimeBilling, transiciones
+// de estado y fechas en hora de Chile. Sin I/O, para poder probarlo directo.
 
 const ZONA = "America/Santiago";
 
-export const DECIMA_MIN = 6;
+// TimeBilling solo acepta duraciones en múltiplos de 5 minutos (verificado en
+// el formulario real de bsvv.thetimebilling.com el 24-08-2026).
+export const PASO_MIN = 5;
 
 export type EstadoHora = "corriendo" | "borrador" | "aprobada" | "cargada" | "error";
 
-// Los estudios facturan en décimas de hora; siempre hacia arriba.
-export function redondearDecima(minutos: number): number {
+// Siempre hacia arriba: el trabajo empezado se cobra entero.
+export function redondearPaso(minutos: number): number {
   if (minutos <= 0) return 0;
-  return Math.ceil(minutos / DECIMA_MIN) * DECIMA_MIN;
+  return Math.ceil(minutos / PASO_MIN) * PASO_MIN;
 }
 
 const TRANSICIONES: Record<EstadoHora, EstadoHora[]> = {
