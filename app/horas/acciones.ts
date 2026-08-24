@@ -5,8 +5,11 @@ import { revalidatePath } from "next/cache";
 import { DECIMA_MIN, redondearDecima, minutosEntre, transicionValida, type EstadoHora } from "@/lib/horas";
 import { plantillaDe, tieneMarcadores } from "@/lib/plantillas-horas";
 
-// Cambia el estado de una hora validando la transición contra la máquina de
-// estados. Devuelve la fila anterior por si hace falta.
+// Valida la transición contra la máquina de estados y escribe con
+// compare-and-swap: el update solo toca la fila si su estado sigue siendo
+// el que leímos (.eq("estado", desde)). Si otra escritura se coló entremedio
+// (doble clic, o el puente escribiendo directo a Supabase), el update no
+// afecta ninguna fila y lanzamos un error legible en vez de pisar el cambio.
 async function moverEstado(id: string, hasta: EstadoHora, campos: Record<string, unknown> = {}) {
   const supabase = await clienteServidor();
   const { data: fila, error: errorLectura } = await supabase
@@ -18,8 +21,16 @@ async function moverEstado(id: string, hasta: EstadoHora, campos: Record<string,
     throw new Error(`No se puede pasar de ${desde} a ${hasta}.`);
   }
 
-  const { error } = await supabase.from("horas").update({ estado: hasta, ...campos }).eq("id", id);
+  const { data: actualizadas, error } = await supabase
+    .from("horas")
+    .update({ estado: hasta, ...campos })
+    .eq("id", id)
+    .eq("estado", desde) // compare-and-swap: si cambió entremedio, no toca nada
+    .select("id");
   if (error) throw new Error(error.message);
+  if (!actualizadas || actualizadas.length === 0) {
+    throw new Error("La hora cambió de estado mientras la editabas. Recarga y reintenta.");
+  }
   revalidatePath("/horas");
 }
 
@@ -69,10 +80,12 @@ export async function actualizarHora(id: string, datos: FormData) {
   const duracion = datos.get("duracion_min");
   // No basta con "duracion truthy": "0" también lo es y redondearDecima(0) da 0,
   // lo que revienta el check (duracion_min > 0). Tampoco hay que confiar en que
-  // el string sea numérico: texto no numérico da NaN y Math.max(6, NaN) es NaN.
-  // Cualquiera de los dos casos se trata igual que un campo vacío: null.
+  // el string sea numérico o positivo: texto no numérico da NaN, y un negativo
+  // como "-5" pasa Number.isFinite y redondearDecima(-5) da 0 por su propia
+  // guarda, lo que Math.max convertiría en 6 sin avisar. Cualquiera de esos
+  // casos (vacío, no numérico, cero o negativo) se trata igual: null.
   const minutos = duracion ? Number(duracion) : null;
-  const duracionMin = minutos !== null && Number.isFinite(minutos)
+  const duracionMin = minutos !== null && Number.isFinite(minutos) && minutos > 0
     ? Math.max(DECIMA_MIN, redondearDecima(minutos))
     : null;
   const { error } = await supabase.from("horas").update({
