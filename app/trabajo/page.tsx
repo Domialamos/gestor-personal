@@ -10,10 +10,11 @@ export default async function Trabajo() {
   const hoy = hoyChile();
   const inicioSemana = new Date(Date.now() - 6 * 864e5).toISOString();
 
-  const [eventos, legales, horas] = await Promise.all([
+  const [eventos, legales, horas, tareas] = await Promise.all([
     supabase.from("eventos_cache").select("id,titulo,inicio,todo_el_dia,ubicacion").gte("inicio", new Date().toISOString()).order("inicio").limit(8),
     supabase.from("noticias").select("id,titulo,fuente,url,publicado_en,temas").eq("tipo", "legal").order("publicado_en", { ascending: false }).limit(6),
     supabase.from("horas").select("inicio,fin,estado").gte("inicio", inicioSemana).limit(500),
+    supabase.from("tareas").select("id", { count: "exact", head: true }).eq("estado", "pendiente"),
   ]);
 
   const eventosHoy = (eventos.data ?? []).filter((e) => e.inicio.slice(0, 10) === hoy);
@@ -33,6 +34,7 @@ export default async function Trabajo() {
       <div className="kpis">
         <div className="card kpi revelar"><b>{eventosHoy.length}</b><span>Reuniones hoy</span></div>
         <div className="card kpi revelar"><b>{horasSemana}</b><span>Horas últimos 7 días</span></div>
+        <div className="card kpi revelar"><b>{tareas.count ?? 0}</b><span>Tareas pendientes</span></div>
         <div className="card kpi revelar"><b>{corriendo ? "Sí" : "No"}</b><span>Cronómetro corriendo</span></div>
         <div className="card kpi revelar"><b>{legales.data?.length ?? 0}</b><span>Novedades legales</span></div>
       </div>
@@ -71,6 +73,7 @@ export default async function Trabajo() {
       </div>
 
       <p style={{ marginTop: "1.25rem" }}>
+        <Link className="pill" href="/tareas">Ir a tareas y bitácora</Link>{" "}
         <Link className="pill" href="/horas">Ir a la carga de horas</Link>
       </p>
     </main>

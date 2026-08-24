@@ -8,6 +8,7 @@
   /* Familia Trabajo (fría) */
   --bruma: #e8edf3;    /* hub trabajo */
   --hielo: #d9e5ef;    /* calendario */
+  --niebla: #dfe6e4;   /* tareas y bitácora */
   --arena: #ece3cf;    /* horas */
   --piedra: #e5e1d6;   /* radar legal */
   --acento-trabajo: #2b5aa0;
@@ -84,6 +85,7 @@ body {
 .fondo--papel { --fondo: var(--papel); }
 .fondo--bruma { --fondo: var(--bruma); --acento: var(--acento-trabajo); }
 .fondo--hielo { --fondo: var(--hielo); --acento: var(--acento-trabajo); }
+.fondo--niebla { --fondo: var(--niebla); --acento: var(--acento-trabajo); }
 .fondo--arena { --fondo: var(--arena); --acento: var(--acento-trabajo); }
 .fondo--piedra { --fondo: var(--piedra); --acento: var(--acento-trabajo); }
 .fondo--marfil { --fondo: var(--marfil); --acento: var(--acento-personal); }

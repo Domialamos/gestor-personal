@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { cerrarSesion } from "@/app/auth/acciones";
 
 const TRABAJO = [
+  { ruta: "/tareas", nombre: "Tareas" },
   { ruta: "/calendario", nombre: "Calendario" },
   { ruta: "/horas", nombre: "Horas" },
   { ruta: "/noticias-legales", nombre: "Legal" },
@@ -22,6 +23,7 @@ const PERSONAL = [
 const FONDOS: Record<string, string> = {
   "/": "fondo--papel",
   "/trabajo": "fondo--bruma",
+  "/tareas": "fondo--niebla",
   "/calendario": "fondo--hielo",
   "/horas": "fondo--arena",
   "/noticias-legales": "fondo--piedra",
