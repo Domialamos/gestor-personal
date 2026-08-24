@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# puente local a TimeBilling: sesión, secretos y estado en vuelo
+/puente/node_modules
+/puente/perfil
+/puente/.env
+/puente/en-vuelo.json
+/puente/descubierto.json
