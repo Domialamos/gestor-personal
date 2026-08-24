@@ -67,9 +67,17 @@ export async function actualizarHora(id: string, datos: FormData) {
   const supabase = await clienteServidor();
   const proyecto = datos.get("proyecto_id");
   const duracion = datos.get("duracion_min");
+  // No basta con "duracion truthy": "0" también lo es y redondearDecima(0) da 0,
+  // lo que revienta el check (duracion_min > 0). Tampoco hay que confiar en que
+  // el string sea numérico: texto no numérico da NaN y Math.max(6, NaN) es NaN.
+  // Cualquiera de los dos casos se trata igual que un campo vacío: null.
+  const minutos = duracion ? Number(duracion) : null;
+  const duracionMin = minutos !== null && Number.isFinite(minutos)
+    ? Math.max(DECIMA_MIN, redondearDecima(minutos))
+    : null;
   const { error } = await supabase.from("horas").update({
     proyecto_id: proyecto ? Number(proyecto) : null,
-    duracion_min: duracion ? redondearDecima(Number(duracion)) : null,
+    duracion_min: duracionMin,
     tipo_trabajo: String(datos.get("tipo_trabajo") || "general"),
     descripcion: String(datos.get("descripcion") || ""),
     facturable: datos.get("facturable") === "on",
