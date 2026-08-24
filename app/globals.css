@@ -1,23 +1,42 @@
 @import "tailwindcss";
 
-/* Tokens serious.business */
+/* Sistema de diseño «dos mundos»: familia fría para Trabajo, cálida para Personal */
 :root {
-  --tinta: #1e1e1e;
-  --papel: #ffffff;
-  --crema: #fcf8ec;
-  --ecru: #f0e8db;
-  --rosa: #fbc1d4;
-  --rosa-fuerte: #ff7ec4;
-  --amarillo: #fed35b;
-  --lila: #c3abff;
-  --celeste: #d2d2fb;
-  --menta: #aef6c6;
-  --exito: #48b469;
-  --peligro: #fe0000;
-  --mudo: #afafaf;
-  --filete: rgba(30, 30, 30, 0.18);
-  --filete-suave: rgba(30, 30, 30, 0.1);
+  --tinta: #22201b;
+  --papel: #faf9f6;
+
+  /* Familia Trabajo (fría) */
+  --bruma: #e8edf3;    /* hub trabajo */
+  --hielo: #d9e5ef;    /* calendario */
+  --arena: #ece3cf;    /* horas */
+  --piedra: #e5e1d6;   /* radar legal */
+  --acento-trabajo: #2b5aa0;
+
+  /* Familia Personal (cálida) */
+  --marfil: #f5eee1;   /* hub personal */
+  --durazno: #f6dcc4;  /* actualidad */
+  --barro: #f0cfc2;    /* cuentas */
+  --salvia: #d8e5d0;   /* gastos */
+  --glicina: #e2d8ee;  /* reembolsos */
+  --acento-personal: #c25a32;
+
+  /* Alias de la paleta anterior, remapeados a los tonos nuevos */
+  --crema: var(--marfil);
+  --ecru: var(--piedra);
+  --rosa: var(--barro);
+  --rosa-fuerte: var(--acento-personal);
+  --amarillo: var(--arena);
+  --lila: var(--glicina);
+  --celeste: var(--hielo);
+  --menta: var(--salvia);
+
+  --exito: #3d8f5f;
+  --peligro: #c8321f;
+  --mudo: #9a958a;
+  --filete: rgba(34, 32, 27, 0.18);
+  --filete-suave: rgba(34, 32, 27, 0.1);
   --fondo: var(--papel);
+  --acento: var(--tinta);
   --ease-suave: cubic-bezier(0.45, 0, 0.55, 1);
   --ease-salida: cubic-bezier(0.25, 1, 0.5, 1);
   --hover: 0.3s;
@@ -61,8 +80,18 @@ body {
   min-height: 100dvh;
 }
 
-/* Fondos pastel por módulo */
+/* Fondos por módulo: cada ámbito hereda su acento */
 .fondo--papel { --fondo: var(--papel); }
+.fondo--bruma { --fondo: var(--bruma); --acento: var(--acento-trabajo); }
+.fondo--hielo { --fondo: var(--hielo); --acento: var(--acento-trabajo); }
+.fondo--arena { --fondo: var(--arena); --acento: var(--acento-trabajo); }
+.fondo--piedra { --fondo: var(--piedra); --acento: var(--acento-trabajo); }
+.fondo--marfil { --fondo: var(--marfil); --acento: var(--acento-personal); }
+.fondo--durazno { --fondo: var(--durazno); --acento: var(--acento-personal); }
+.fondo--barro { --fondo: var(--barro); --acento: var(--acento-personal); }
+.fondo--salvia { --fondo: var(--salvia); --acento: var(--acento-personal); }
+.fondo--glicina { --fondo: var(--glicina); --acento: var(--acento-personal); }
+/* Alias anteriores */
 .fondo--crema { --fondo: var(--crema); }
 .fondo--ecru { --fondo: var(--ecru); }
 .fondo--rosa { --fondo: var(--rosa); }
@@ -105,6 +134,28 @@ main { padding: 0 var(--padding-global) 6rem; max-width: 90rem; margin: 0 auto; 
 .nav a:hover::after, .nav a[aria-current="page"]::after { width: 100%; }
 .nav .marca { font-size: 1rem; letter-spacing: -0.03rem; margin-right: auto; }
 .nav .marca em { font-family: var(--font-serif), Georgia, serif; font-style: italic; font-weight: 400; }
+.nav .ambito {
+  font-size: 0.688rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--mudo); margin-left: 0.5rem;
+}
+.nav .ambito--trabajo { color: var(--acento-trabajo); }
+.nav .ambito--personal { color: var(--acento-personal); }
+.nav .separador { width: 1px; height: 1.25rem; background: var(--filete); }
+
+/* Portada dividida en dos mundos */
+.mundos { display: grid; gap: 1.25rem; }
+@media (min-width: 600px) { .mundos { grid-template-columns: 1fr 1fr; } }
+.mundo {
+  border-radius: 1rem; padding: 1.5rem; border: 1px solid var(--filete-suave);
+  display: flex; flex-direction: column; gap: 1rem;
+}
+.mundo--trabajo { background: var(--bruma); --acento: var(--acento-trabajo); }
+.mundo--personal { background: var(--marfil); --acento: var(--acento-personal); }
+.mundo h2 { margin: 0; font-size: 1.75rem; letter-spacing: -0.04rem; }
+.mundo .etiqueta {
+  font-size: 0.688rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--acento);
+}
 
 /* Pills y botones */
 .pill {
@@ -119,7 +170,7 @@ main { padding: 0 var(--padding-global) 6rem; max-width: 90rem; margin: 0 auto; 
 }
 .pill:hover { background: var(--tinta); color: var(--fondo); border-color: var(--tinta); }
 .pill--primaria { background: var(--tinta); color: #fff; border-color: var(--tinta); }
-.pill--primaria:hover { background: var(--rosa-fuerte); border-color: var(--rosa-fuerte); color: var(--tinta); }
+.pill--primaria:hover { background: var(--acento); border-color: var(--acento); color: #fff; }
 .pill--activa { background: var(--tinta); color: #fff; border-color: var(--tinta); }
 .pill--mini { height: 1.75rem; padding: 0 0.75rem; font-size: 0.75rem; }
 

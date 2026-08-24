@@ -5,28 +5,32 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { cerrarSesion } from "@/app/auth/acciones";
 
-const SECCIONES = [
-  { ruta: "/", nombre: "Hoy" },
-  { ruta: "/noticias", nombre: "Actualidad" },
-  { ruta: "/noticias-legales", nombre: "Legal" },
+const TRABAJO = [
   { ruta: "/calendario", nombre: "Calendario" },
   { ruta: "/horas", nombre: "Horas" },
+  { ruta: "/noticias-legales", nombre: "Legal" },
+];
+
+const PERSONAL = [
+  { ruta: "/noticias", nombre: "Actualidad" },
   { ruta: "/cuentas", nombre: "Cuentas" },
   { ruta: "/gastos", nombre: "Gastos" },
   { ruta: "/reembolsos", nombre: "Reembolsos" },
 ];
 
-// Cada módulo pinta el fondo de su pastel, al estilo serious.business
+// Cada módulo pinta el fondo de su familia: fría (trabajo) o cálida (personal)
 const FONDOS: Record<string, string> = {
   "/": "fondo--papel",
-  "/noticias": "fondo--crema",
-  "/noticias-legales": "fondo--ecru",
-  "/calendario": "fondo--celeste",
-  "/horas": "fondo--amarillo",
-  "/cuentas": "fondo--rosa",
-  "/gastos": "fondo--menta",
-  "/reembolsos": "fondo--lila",
-  "/ingresar": "fondo--crema",
+  "/trabajo": "fondo--bruma",
+  "/calendario": "fondo--hielo",
+  "/horas": "fondo--arena",
+  "/noticias-legales": "fondo--piedra",
+  "/personal": "fondo--marfil",
+  "/noticias": "fondo--durazno",
+  "/cuentas": "fondo--barro",
+  "/gastos": "fondo--salvia",
+  "/reembolsos": "fondo--glicina",
+  "/ingresar": "fondo--marfil",
 };
 
 export function Navegacion() {
@@ -40,7 +44,15 @@ export function Navegacion() {
       <Link className="marca" href="/">
         Gestor <em>personal</em>
       </Link>
-      {SECCIONES.map((s) => (
+      <Link className="ambito ambito--trabajo" href="/trabajo" aria-current={ruta === "/trabajo" ? "page" : undefined}>Trabajo</Link>
+      {TRABAJO.map((s) => (
+        <Link key={s.ruta} href={s.ruta} aria-current={ruta === s.ruta ? "page" : undefined}>
+          {s.nombre}
+        </Link>
+      ))}
+      <span className="separador" aria-hidden />
+      <Link className="ambito ambito--personal" href="/personal" aria-current={ruta === "/personal" ? "page" : undefined}>Personal</Link>
+      {PERSONAL.map((s) => (
         <Link key={s.ruta} href={s.ruta} aria-current={ruta === s.ruta ? "page" : undefined}>
           {s.nombre}
         </Link>
