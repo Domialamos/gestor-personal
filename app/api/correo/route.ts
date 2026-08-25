@@ -25,8 +25,9 @@ export async function POST(solicitud: NextRequest) {
 
   const datos = evento.data ?? {};
   const remitente: string = String(datos.from?.email ?? datos.from ?? "");
-  const permitido = (process.env.EMAIL_PERMITIDO ?? "").toLowerCase();
-  if (!permitido || !remitente.toLowerCase().includes(permitido)) {
+  const permitidos = (process.env.EMAIL_PERMITIDO ?? "")
+    .toLowerCase().split(",").map((c) => c.trim()).filter(Boolean);
+  if (!permitidos.some((c) => remitente.toLowerCase().includes(c))) {
     return NextResponse.json({ ignorado: "remitente no permitido" });
   }
 

@@ -18,11 +18,13 @@ export default async function Tareas({ searchParams }: { searchParams: Promise<{
   const supabase = await clienteServidor();
   const hoy = hoyChile();
 
-  const [pendientes, hechasHoy, proyectos] = await Promise.all([
-    // Las pendientes se arrastran: se muestran todas, vengan del día que vengan
-    supabase.from("tareas").select("*").eq("estado", "pendiente").order("creado_en"),
+  const manana = new Date(Date.now() + 864e5).toISOString().slice(0, 10);
+  const [pendientes, hechasHoy, proyectos, eventosHoy] = await Promise.all([
+    // Las pendientes se arrastran: se muestran todas, con las de fecha límite primero
+    supabase.from("tareas").select("*").eq("estado", "pendiente").order("fecha_limite", { ascending: true, nullsFirst: false }).order("creado_en"),
     supabase.from("tareas").select("*").eq("estado", "hecha").gte("completada_en", hoy + "T03:00:00Z").order("completada_en", { ascending: false }),
     supabase.from("tb_proyectos").select("proyecto_id,nombre,cliente").eq("activo", true).order("cliente").order("nombre").limit(3000),
+    supabase.from("eventos_cache").select("id,titulo,inicio,todo_el_dia,ubicacion").gte("inicio", hoy).lt("inicio", manana).order("inicio").limit(12),
   ]);
 
   let bitacora = supabase.from("tareas").select("*").order("creado_en", { ascending: false }).limit(300);
@@ -57,6 +59,7 @@ export default async function Tareas({ searchParams }: { searchParams: Promise<{
           </datalist>
           <label className="campo">Cliente (si no está en la lista)<input name="cliente" placeholder="Se completa solo desde el asunto" /></label>
           <label className="campo">Documento o enlace<input name="documento" placeholder="Prórroga v2.docx, iwl://… , url" /></label>
+          <label className="campo">Recordar el (opcional)<input name="fecha_limite" type="date" /></label>
           <label className="campo">Detalle<input name="detalle" placeholder="A quién, con copia a…" /></label>
           <button className="pill pill--primaria">Anotar</button>
         </form>
@@ -65,6 +68,16 @@ export default async function Tareas({ searchParams }: { searchParams: Promise<{
       <div className="grilla grilla--2" style={{ marginBottom: "2rem" }}>
         <section className="card card--destacada revelar">
           <h2 style={{ margin: "0 0 0.75rem", fontSize: "1.25rem" }}>Para <span className="serif">hoy</span></h2>
+          {(eventosHoy.data ?? []).length > 0 && (
+            <div style={{ marginBottom: "0.75rem", paddingBottom: "0.75rem", borderBottom: "1px solid var(--filete-suave)" }}>
+              {(eventosHoy.data ?? []).map((e) => (
+                <p key={e.id} style={{ margin: "0.3rem 0", fontSize: "0.875rem" }}>
+                  <span className="estado estado--info">{e.todo_el_dia ? "todo el día" : fechaHora(e.inicio).split(" ").pop()}</span>{" "}
+                  {e.titulo}{e.ubicacion ? <span className="meta"> · {e.ubicacion}</span> : null}
+                </p>
+              ))}
+            </div>
+          )}
           {(pendientes.data ?? []).length === 0 ? (
             <p className="meta">Nada pendiente. Día despejado.</p>
           ) : (
@@ -76,6 +89,11 @@ export default async function Tareas({ searchParams }: { searchParams: Promise<{
                 <span style={{ fontSize: "0.938rem" }}>
                   {t.titulo}
                   <span className="meta"> · {TIPOS[t.tipo] ?? t.tipo}{t.cliente ? ` · ${t.cliente}` : ""}{t.fecha !== hoy ? ` · desde ${fmtFecha(t.fecha)}` : ""}</span>
+                  {t.fecha_limite && (
+                    <span className={`estado ${t.fecha_limite <= hoy ? "estado--riesgo" : "estado--alerta"}`} style={{ marginLeft: "0.4rem" }}>
+                      {t.fecha_limite < hoy ? `venció ${fmtFecha(t.fecha_limite)}` : t.fecha_limite === hoy ? "para hoy" : fmtFecha(t.fecha_limite)}
+                    </span>
+                  )}
                 </span>
                 <form action={eliminarTarea.bind(null, t.id)} style={{ marginLeft: "auto" }}>
                   <button className="pill pill--mini" title="Eliminar">×</button>

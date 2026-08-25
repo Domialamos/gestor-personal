@@ -7,12 +7,36 @@ export const dynamic = "force-dynamic";
 
 export default async function Calendario() {
   const supabase = await clienteServidor();
-  const { data } = await supabase
-    .from("eventos_cache")
-    .select("*")
-    .gte("inicio", new Date(Date.now() - 864e5).toISOString())
-    .order("inicio", { ascending: true })
-    .limit(500);
+  const [{ data }, { data: recordatorios }] = await Promise.all([
+    supabase
+      .from("eventos_cache")
+      .select("*")
+      .gte("inicio", new Date(Date.now() - 864e5).toISOString())
+      .order("inicio", { ascending: true })
+      .limit(500),
+    supabase
+      .from("tareas")
+      .select("id,titulo,cliente,fecha_limite")
+      .eq("estado", "pendiente")
+      .not("fecha_limite", "is", null)
+      .gte("fecha_limite", hoyChile())
+      .order("fecha_limite")
+      .limit(200),
+  ]);
+
+  // Las tareas con fecha entran al calendario como eventos de día completo
+  const eventos = [
+    ...(data ?? []),
+    ...(recordatorios ?? []).map((t) => ({
+      id: `tarea-${t.id}`,
+      origen: "tarea" as const,
+      titulo: t.cliente ? `${t.titulo} · ${t.cliente}` : t.titulo,
+      inicio: `${t.fecha_limite}T12:00:00`,
+      fin: null,
+      todo_el_dia: true,
+      ubicacion: null,
+    })),
+  ].sort((a, b) => a.inicio.localeCompare(b.inicio));
 
   const sinIcs = !process.env.ICS_URL_GOOGLE && !process.env.ICS_URL_MICROSOFT;
 
@@ -46,7 +70,7 @@ export default async function Calendario() {
         </form>
       </details>
 
-      <VistaCalendario eventos={data ?? []} />
+      <VistaCalendario eventos={eventos} />
     </main>
   );
 }

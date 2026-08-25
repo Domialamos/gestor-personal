@@ -5,7 +5,7 @@ import { actualizarAhora } from "@/app/noticias/acciones";
 import { eliminarEvento } from "./acciones";
 
 type Evento = {
-  id: string; origen: "google" | "microsoft" | "manual"; titulo: string;
+  id: string; origen: "google" | "microsoft" | "manual" | "tarea"; titulo: string;
   inicio: string; fin: string | null; todo_el_dia: boolean; ubicacion: string | null;
 };
 
@@ -14,6 +14,7 @@ const ORIGENES: Record<string, { nombre: string; clase: string }> = {
   google: { nombre: "Universidad", clase: "estado--info" },
   microsoft: { nombre: "Estudio", clase: "estado--alerta" },
   manual: { nombre: "Manual", clase: "estado--neutro" },
+  tarea: { nombre: "Tarea", clase: "estado--riesgo" },
 };
 
 function claveDia(iso: string): string {

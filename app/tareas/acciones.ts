@@ -36,6 +36,7 @@ export async function crearTarea(datos: FormData) {
     cliente,
     detalle: datos.get("detalle") || null,
     documento: datos.get("documento") || null,
+    fecha_limite: datos.get("fecha_limite") || null,
   });
   if (error) throw new Error(error.message);
   revalidatePath("/tareas");
