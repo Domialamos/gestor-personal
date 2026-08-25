@@ -23,7 +23,7 @@ export async function middleware(solicitud: NextRequest) {
 
   const { data: { user } } = await supabase.auth.getUser();
   const ruta = solicitud.nextUrl.pathname;
-  const esPublica = ruta.startsWith("/ingresar") || ruta.startsWith("/auth") || ruta.startsWith("/api/cron");
+  const esPublica = ruta.startsWith("/ingresar") || ruta.startsWith("/auth") || ruta.startsWith("/api/cron") || ruta.startsWith("/api/correo");
 
   if (!user && !esPublica) {
     const url = solicitud.nextUrl.clone();
