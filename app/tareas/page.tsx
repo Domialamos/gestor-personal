@@ -1,6 +1,7 @@
 import { clienteServidor } from "@/lib/supabase/servidor";
 import { fecha as fmtFecha, fechaHora, hoyChile } from "@/lib/formato";
 import { crearTarea, completarTarea, reabrirTarea, eliminarTarea } from "./acciones";
+import { SelectorClienteAsunto } from "@/componentes/selector-cliente-asunto";
 
 export const dynamic = "force-dynamic";
 
@@ -49,14 +50,7 @@ export default async function Tareas({ searchParams }: { searchParams: Promise<{
               {Object.entries(TIPOS).map(([v, e]) => <option key={v} value={v}>{e}</option>)}
             </select>
           </label>
-          <label className="campo">Cliente — Asunto (TimeBilling)
-            <input name="asunto_texto" list="asuntos" placeholder="Escribe el cliente: Food Group…" autoComplete="off" />
-          </label>
-          <datalist id="asuntos">
-            {(proyectos.data ?? []).map((p) => (
-              <option key={p.proyecto_id} value={`${p.cliente ? p.cliente + " — " : ""}${p.nombre}`} />
-            ))}
-          </datalist>
+          <SelectorClienteAsunto proyectos={proyectos.data ?? []} />
           <label className="campo">Cliente (si no está en la lista)<input name="cliente" placeholder="Se completa solo desde el asunto" /></label>
           <label className="campo">Documento o enlace<input name="documento" placeholder="Prórroga v2.docx, iwl://… , url" /></label>
           <label className="campo">Recordar el (opcional)<input name="fecha_limite" type="date" /></label>
