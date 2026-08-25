@@ -1,6 +1,7 @@
 import { clienteServidor } from "@/lib/supabase/servidor";
 import { fecha as fmtFecha, fechaHora, hoyChile } from "@/lib/formato";
 import { crearTarea, completarTarea, reabrirTarea, eliminarTarea } from "./acciones";
+import { SelectorAsunto } from "@/componentes/selector-asunto";
 
 export const dynamic = "force-dynamic";
 
@@ -48,14 +49,7 @@ export default async function Tareas({ searchParams }: { searchParams: Promise<{
             </select>
           </label>
           <label className="campo">Asunto (TimeBilling)
-            <select name="proyecto_id" defaultValue="">
-              <option value="">— sin asunto —</option>
-              {(proyectos.data ?? []).map((p) => (
-                <option key={p.proyecto_id} value={p.proyecto_id}>
-                  {p.nombre}{p.cliente ? ` · ${p.cliente}` : ""}
-                </option>
-              ))}
-            </select>
+            <SelectorAsunto proyectos={proyectos.data ?? []} />
           </label>
           <label className="campo">Cliente (si no está arriba)<input name="cliente" placeholder="Se completa solo desde el asunto" /></label>
           <label className="campo">Documento o enlace<input name="documento" placeholder="Prórroga v2.docx, iwl://… , url" /></label>
