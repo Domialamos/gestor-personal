@@ -16,7 +16,7 @@ export default async function Trabajo() {
     supabase.from("horas").select("inicio,fin,estado").gte("inicio", inicioSemana).limit(500),
     supabase.from("tareas").select("id", { count: "exact", head: true }).eq("estado", "pendiente"),
     supabase.from("tareas").select("id,titulo,cliente,fecha_limite").eq("estado", "pendiente").not("fecha_limite", "is", null)
-      .lte("fecha_limite", new Date(Date.now() + 7 * 864e5).toISOString().slice(0, 10)).order("fecha_limite").limit(8),
+      .lte("fecha_limite", new Date(Date.now() + 7 * 864e5).toISOString().slice(0, 10)).order("fecha_limite").limit(12),
   ]);
 
   const eventosHoy = (eventos.data ?? []).filter((e) => e.inicio.slice(0, 10) === hoy);
@@ -41,18 +41,21 @@ export default async function Trabajo() {
         <div className="card kpi revelar"><b>{legales.data?.length ?? 0}</b><span>Novedades legales</span></div>
       </div>
 
-      {(recordatorios.data ?? []).length > 0 && (
-        <section className="card card--destacada revelar" style={{ marginBottom: "1.25rem" }}>
-          <h2 style={{ margin: "0 0 0.75rem", fontSize: "1.25rem" }}>No <span className="serif">olvidar</span></h2>
-          {(recordatorios.data ?? []).map((t) => (
+      {/* Espacio fijo del hub: se muestra siempre, aunque no haya nada que recordar */}
+      <section className="card card--destacada revelar" style={{ marginBottom: "1.25rem" }}>
+        <h2 style={{ margin: "0 0 0.75rem", fontSize: "1.25rem" }}>No <span className="serif">olvidar</span></h2>
+        {(recordatorios.data ?? []).length === 0 ? (
+          <p className="meta">Nada con fecha en los próximos 7 días.</p>
+        ) : (
+          (recordatorios.data ?? []).map((t) => (
             <p key={t.id} style={{ margin: "0.4rem 0", fontSize: "0.938rem" }}>
               <span className={`estado ${t.fecha_limite! <= hoy ? "estado--riesgo" : "estado--alerta"}`}>{fecha(t.fecha_limite)}</span>{" "}
               {t.titulo}{t.cliente ? <span className="meta"> · {t.cliente}</span> : null}
             </p>
-          ))}
-          <Link className="pill pill--mini" href="/tareas" style={{ marginTop: "0.5rem" }}>Ver tareas</Link>
-        </section>
-      )}
+          ))
+        )}
+        <Link className="pill pill--mini" href="/tareas" style={{ marginTop: "0.5rem" }}>Ver tareas</Link>
+      </section>
 
       <div className="grilla grilla--2">
         <section className="card card--destacada revelar">

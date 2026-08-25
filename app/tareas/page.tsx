@@ -21,8 +21,12 @@ export default async function Tareas({ searchParams }: { searchParams: Promise<{
 
   const manana = new Date(Date.now() + 864e5).toISOString().slice(0, 10);
   const [pendientes, hechasHoy, proyectos, eventosHoy] = await Promise.all([
-    // Las pendientes se arrastran: se muestran todas, con las de fecha límite primero
-    supabase.from("tareas").select("*").eq("estado", "pendiente").order("fecha_limite", { ascending: true, nullsFirst: false }).order("creado_en"),
+    // Las pendientes se arrastran, pero lo que vence en más de una semana (los plazos
+    // largos de una carta Gantt) no ensucia el to-do del día: queda en la bitácora y
+    // reaparece aquí cuando entra en los próximos 7 días
+    supabase.from("tareas").select("*").eq("estado", "pendiente")
+      .or(`fecha_limite.is.null,fecha_limite.lte.${new Date(Date.now() + 7 * 864e5).toISOString().slice(0, 10)}`)
+      .order("fecha_limite", { ascending: true, nullsFirst: false }).order("creado_en"),
     supabase.from("tareas").select("*").eq("estado", "hecha").gte("completada_en", hoy + "T03:00:00Z").order("completada_en", { ascending: false }),
     supabase.from("tb_proyectos").select("proyecto_id,nombre,cliente").eq("activo", true).order("cliente").order("nombre").limit(3000),
     supabase.from("eventos_cache").select("id,titulo,inicio,todo_el_dia,ubicacion").gte("inicio", hoy).lt("inicio", manana).order("inicio").limit(12),
