@@ -5,14 +5,28 @@ import { revalidatePath } from "next/cache";
 
 export async function crearTarea(datos: FormData) {
   const supabase = await clienteServidor();
-  const proyectoId = datos.get("proyecto_id") ? Number(datos.get("proyecto_id")) : null;
 
-  // El cliente queda denormalizado en la tarea para que la bitácora se busque sola
+  // El campo de asunto llega como texto "Cliente — Asunto" (datalist); se resuelve
+  // contra tb_proyectos y el cliente queda denormalizado para que la bitácora se busque sola
+  const asuntoTexto = String(datos.get("asunto_texto") || "").trim();
+  let proyectoId: number | null = null;
   let cliente = String(datos.get("cliente") || "").trim() || null;
-  if (proyectoId && !cliente) {
-    const { data: p } = await supabase
-      .from("tb_proyectos").select("cliente,nombre").eq("proyecto_id", proyectoId).maybeSingle();
-    cliente = p?.cliente || p?.nombre || null;
+
+  if (asuntoTexto) {
+    const [parteCliente, parteNombre] = asuntoTexto.split(" — ");
+    let consulta = supabase.from("tb_proyectos").select("proyecto_id,cliente,nombre").eq("activo", true).limit(1);
+    consulta = parteNombre
+      ? consulta.ilike("cliente", parteCliente).ilike("nombre", parteNombre)
+      : consulta.or(`cliente.ilike.%${parteCliente}%,nombre.ilike.%${parteCliente}%`);
+    const { data: candidatos } = await consulta;
+    const p = candidatos?.[0];
+    if (p) {
+      proyectoId = p.proyecto_id;
+      cliente = cliente || p.cliente || p.nombre;
+    } else {
+      // No calzó con TimeBilling: se guarda igual como cliente de texto libre
+      cliente = cliente || asuntoTexto;
+    }
   }
 
   const { error } = await supabase.from("tareas").insert({

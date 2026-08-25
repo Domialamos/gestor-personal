@@ -1,7 +1,6 @@
 import { clienteServidor } from "@/lib/supabase/servidor";
 import { fecha as fmtFecha, fechaHora, hoyChile } from "@/lib/formato";
 import { crearTarea, completarTarea, reabrirTarea, eliminarTarea } from "./acciones";
-import { SelectorAsunto } from "@/componentes/selector-asunto";
 
 export const dynamic = "force-dynamic";
 
@@ -23,7 +22,7 @@ export default async function Tareas({ searchParams }: { searchParams: Promise<{
     // Las pendientes se arrastran: se muestran todas, vengan del día que vengan
     supabase.from("tareas").select("*").eq("estado", "pendiente").order("creado_en"),
     supabase.from("tareas").select("*").eq("estado", "hecha").gte("completada_en", hoy + "T03:00:00Z").order("completada_en", { ascending: false }),
-    supabase.from("tb_proyectos").select("proyecto_id,nombre,cliente").eq("activo", true).order("nombre").limit(3000),
+    supabase.from("tb_proyectos").select("proyecto_id,nombre,cliente").eq("activo", true).order("cliente").order("nombre").limit(3000),
   ]);
 
   let bitacora = supabase.from("tareas").select("*").order("creado_en", { ascending: false }).limit(300);
@@ -48,10 +47,15 @@ export default async function Tareas({ searchParams }: { searchParams: Promise<{
               {Object.entries(TIPOS).map(([v, e]) => <option key={v} value={v}>{e}</option>)}
             </select>
           </label>
-          <label className="campo">Asunto (TimeBilling)
-            <SelectorAsunto proyectos={proyectos.data ?? []} />
+          <label className="campo">Cliente — Asunto (TimeBilling)
+            <input name="asunto_texto" list="asuntos" placeholder="Escribe el cliente: Food Group…" autoComplete="off" />
           </label>
-          <label className="campo">Cliente (si no está arriba)<input name="cliente" placeholder="Se completa solo desde el asunto" /></label>
+          <datalist id="asuntos">
+            {(proyectos.data ?? []).map((p) => (
+              <option key={p.proyecto_id} value={`${p.cliente ? p.cliente + " — " : ""}${p.nombre}`} />
+            ))}
+          </datalist>
+          <label className="campo">Cliente (si no está en la lista)<input name="cliente" placeholder="Se completa solo desde el asunto" /></label>
           <label className="campo">Documento o enlace<input name="documento" placeholder="Prórroga v2.docx, iwl://… , url" /></label>
           <label className="campo">Detalle<input name="detalle" placeholder="A quién, con copia a…" /></label>
           <button className="pill pill--primaria">Anotar</button>
