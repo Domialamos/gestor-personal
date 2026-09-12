@@ -126,9 +126,9 @@ export default async function Tareas({ searchParams }: { searchParams: Promise<{
                   )}
                 </p>
                 {grupo.tareas.map((t) => (
-                  <div key={t.id} style={{ display: "flex", alignItems: "baseline", gap: "0.6rem", margin: "0.5rem 0" }}>
+                  <div key={t.id} style={{ display: "flex", alignItems: "baseline", gap: "0.6rem", margin: "0.5rem 0", flexWrap: "wrap" }}>
                     <form action={completarTarea.bind(null, t.id)}>
-                      <button className="pill pill--mini" title="Marcar hecha">✓</button>
+                      <button className="pill pill--mini" title="Marcar hecha" aria-label="Marcar hecha">✓ Hecha</button>
                     </form>
                     <span style={{ fontSize: "0.938rem" }}>
                       {normalizarPrioridad(t.prioridad) === "alta" && (
@@ -143,16 +143,27 @@ export default async function Tareas({ searchParams }: { searchParams: Promise<{
                         </span>
                       )}
                     </span>
-                    <form action={delegarTarea.bind(null, t.id)} style={{ marginLeft: "auto", display: "flex", gap: "0.3rem" }}>
-                      <input
-                        name="delegada_a"
-                        placeholder="Encargar a…"
-                        style={{ width: "8rem", fontSize: "0.813rem", padding: "0.15rem 0.4rem" }}
-                      />
-                      <button className="pill pill--mini" title="Derivar y dejar esperando">→</button>
-                    </form>
+                    {/* El campo de encargo va plegado: cuando estaba suelto en la fila,
+                        en pantalla angosta se apretaba por error en vez de "Hecha" */}
+                    <details style={{ marginLeft: "auto" }}>
+                      <summary className="pill pill--mini" style={{ cursor: "pointer", listStyle: "none" }}>
+                        Encargar…
+                      </summary>
+                      <form
+                        action={delegarTarea.bind(null, t.id)}
+                        style={{ display: "flex", gap: "0.3rem", marginTop: "0.3rem" }}
+                      >
+                        <input
+                          name="delegada_a"
+                          required
+                          placeholder="¿A quién?"
+                          style={{ width: "9rem", fontSize: "0.813rem", padding: "0.15rem 0.4rem" }}
+                        />
+                        <button className="pill pill--mini" title="Derivar y dejar esperando">Derivar</button>
+                      </form>
+                    </details>
                     <form action={eliminarTarea.bind(null, t.id)}>
-                      <button className="pill pill--mini" title="Eliminar">×</button>
+                      <button className="pill pill--mini" title="Eliminar" aria-label="Eliminar">×</button>
                     </form>
                   </div>
                 ))}
