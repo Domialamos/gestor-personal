@@ -11,6 +11,7 @@ const TRABAJO = [
   { ruta: "/horas", nombre: "Horas" },
   { ruta: "/extraer", nombre: "Extraer" },
   { ruta: "/noticias-legales", nombre: "Legal" },
+  { ruta: "/bcn", nombre: "BCN" },
 ];
 
 const PERSONAL = [
@@ -29,6 +30,7 @@ const FONDOS: Record<string, string> = {
   "/horas": "fondo--arena",
   "/noticias-legales": "fondo--piedra",
   "/extraer": "fondo--escarcha",
+  "/bcn": "fondo--piedra",
   "/personal": "fondo--marfil",
   "/noticias": "fondo--durazno",
   "/cuentas": "fondo--barro",

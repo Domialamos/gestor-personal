@@ -286,3 +286,17 @@ a.enlace:hover { text-decoration-color: var(--tinta); }
 .marca-7 { background: #e1e6c8; }
 .barra { height: 0.5rem; border-radius: 100vmax; background: var(--filete-suave); overflow: hidden; }
 .barra span { display: block; height: 100%; background: var(--acento); transition: width 0.6s var(--ease-salida); }
+
+.bcn-busqueda { display: flex; gap: 0.75rem; align-items: end; margin-bottom: 2.5rem; max-width: 24rem; }
+.bcn-busqueda .campo { flex: 1; }
+.bcn-ficha { background: rgba(255, 255, 255, 0.55); border: 1px solid var(--filete-suave); border-radius: 1rem; padding: 1.5rem; margin-bottom: 2.5rem; max-width: 48rem; }
+.bcn-ficha h2 { font-size: 1.125rem; line-height: 1.4; margin: 0.25rem 0 1rem; }
+.bcn-ficha dl { display: grid; grid-template-columns: max-content 1fr; gap: 0.375rem 1.25rem; margin: 0 0 1rem; font-size: 0.938rem; }
+.bcn-ficha dt { color: var(--mudo); }
+.bcn-ficha dd { margin: 0; }
+.bcn-ficha a, .tabla a { color: inherit; text-underline-offset: 3px; }
+.bcn-numero { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--mudo); margin: 0; }
+.bcn-subtitulo { font-size: 1rem; margin: 0 0 0.75rem; }
+.bcn-aviso { opacity: 0.7; }
+.bcn-nota { font-size: 0.813rem; color: var(--mudo); margin-top: 1.25rem; max-width: 40rem; }
+@media (max-width: 640px) { .bcn-ficha { padding: 1rem; } .tabla th:first-child, .tabla td:first-child { white-space: nowrap; } }
