@@ -3,7 +3,7 @@
   "configurations": [
     {
       "name": "gestor-personal",
-      "runtimeExecutable": "npm",
+      "runtimeExecutable": "npm.cmd",
       "runtimeArgs": ["run", "dev", "--", "-p", "3987"],
       "port": 3987
     }

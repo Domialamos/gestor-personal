@@ -15,3 +15,14 @@ en TimeBilling con el puente local de `puente/` (ver `puente/README.md`).
 
 `ANTHROPIC_API_KEY` es opcional: habilita el botón de pulir la descripción con IA.
 Sin ella el módulo funciona igual.
+
+## Extraer
+
+El módulo `/extraer` saca datos estructurados de contratos, expedientes, informes
+o lo que se defina a mano, con la idea de LangExtract (Google): cada dato es una
+cita literal que se vuelve a buscar en el documento, y queda marcada como exacta,
+aproximada o sin respaldo. El archivo va del navegador al bucket privado
+`documentos` de Supabase; el servidor lo lee (PDF con `unpdf`, Word con `mammoth`,
+PDF escaneado transcrito por Claude) y el navegador pide los tramos de a cuatro
+para no chocar con el techo de tiempo de Vercel. Requiere `ANTHROPIC_API_KEY`.
+Lógica pura y pruebas en `lib/extraer.ts`.

@@ -9,6 +9,7 @@ const TRABAJO = [
   { ruta: "/tareas", nombre: "Tareas" },
   { ruta: "/calendario", nombre: "Calendario" },
   { ruta: "/horas", nombre: "Horas" },
+  { ruta: "/extraer", nombre: "Extraer" },
   { ruta: "/noticias-legales", nombre: "Legal" },
 ];
 
@@ -27,6 +28,7 @@ const FONDOS: Record<string, string> = {
   "/calendario": "fondo--hielo",
   "/horas": "fondo--arena",
   "/noticias-legales": "fondo--piedra",
+  "/extraer": "fondo--escarcha",
   "/personal": "fondo--marfil",
   "/noticias": "fondo--durazno",
   "/cuentas": "fondo--barro",
@@ -38,7 +40,8 @@ const FONDOS: Record<string, string> = {
 export function Navegacion() {
   const ruta = usePathname();
   useEffect(() => {
-    document.body.className = FONDOS[ruta] ?? "fondo--papel";
+    // Las subrutas (/extraer/…) toman el fondo de su módulo
+    document.body.className = FONDOS[ruta] ?? FONDOS["/" + ruta.split("/")[1]] ?? "fondo--papel";
   }, [ruta]);
   if (ruta.startsWith("/ingresar")) return null;
   return (
@@ -48,7 +51,7 @@ export function Navegacion() {
       </Link>
       <Link className="ambito ambito--trabajo" href="/trabajo" aria-current={ruta === "/trabajo" ? "page" : undefined}>Trabajo</Link>
       {TRABAJO.map((s) => (
-        <Link key={s.ruta} href={s.ruta} aria-current={ruta === s.ruta ? "page" : undefined}>
+        <Link key={s.ruta} href={s.ruta} aria-current={ruta === s.ruta || ruta.startsWith(s.ruta + "/") ? "page" : undefined}>
           {s.nombre}
         </Link>
       ))}

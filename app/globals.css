@@ -11,6 +11,7 @@
   --niebla: #dfe6e4;   /* tareas y bitácora */
   --arena: #ece3cf;    /* horas */
   --piedra: #e5e1d6;   /* radar legal */
+  --escarcha: #e4e8ee; /* extraer */
   --acento-trabajo: #2b5aa0;
 
   /* Familia Personal (rosada) */
@@ -88,6 +89,7 @@ body {
 .fondo--niebla { --fondo: var(--niebla); --acento: var(--acento-trabajo); }
 .fondo--arena { --fondo: var(--arena); --acento: var(--acento-trabajo); }
 .fondo--piedra { --fondo: var(--piedra); --acento: var(--acento-trabajo); }
+.fondo--escarcha { --fondo: var(--escarcha); --acento: var(--acento-trabajo); }
 .fondo--marfil { --fondo: var(--marfil); --acento: var(--acento-personal); }
 .fondo--durazno { --fondo: var(--durazno); --acento: var(--acento-personal); }
 .fondo--barro { --fondo: var(--barro); --acento: var(--acento-personal); }
@@ -257,3 +259,30 @@ a.enlace:hover { text-decoration-color: var(--tinta); }
 .vacio { padding: 3rem 0; color: var(--mudo); font-size: 1.125rem; }
 .vacio em { font-family: var(--font-serif), Georgia, serif; font-style: italic; }
 
+
+/* Extraer: lista de datos a la izquierda, documento subrayado a la derecha */
+.extraer-grilla { display: grid; gap: 1.25rem; align-items: start; }
+@media (min-width: 900px) { .extraer-grilla { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); } }
+.extraer-lista { display: grid; gap: 0.75rem; }
+.dato { transition: border-color var(--hover) var(--ease-suave), box-shadow var(--hover) var(--ease-suave); }
+.dato--elegido { border-color: var(--acento); box-shadow: 0 0 0 2px var(--acento); }
+.cita { margin: 0; font-family: var(--font-serif), Georgia, serif; font-size: 1rem; line-height: 1.45; }
+.documento {
+  white-space: pre-wrap; font-family: var(--font-serif), Georgia, serif; font-size: 0.938rem; line-height: 1.6;
+  max-height: 80vh; overflow: auto; overflow-wrap: anywhere;
+}
+@media (min-width: 900px) { .documento { position: sticky; top: 1rem; } }
+.documento mark { color: inherit; border-radius: 0.2rem; padding: 0 0.1rem; cursor: pointer; transition: opacity var(--hover), box-shadow var(--hover); }
+.marca--atenuada { opacity: 0.35; }
+.marca--elegida { box-shadow: 0 0 0 2px var(--tinta); }
+.punto { display: inline-block; width: 0.6rem; height: 0.6rem; border-radius: 50%; }
+.marca-0 { background: #d6e4f5; }
+.marca-1 { background: #f6e2b8; }
+.marca-2 { background: #d4ecd9; }
+.marca-3 { background: #f6d3dd; }
+.marca-4 { background: #e3d9f3; }
+.marca-5 { background: #cfeaea; }
+.marca-6 { background: #f3dcc8; }
+.marca-7 { background: #e1e6c8; }
+.barra { height: 0.5rem; border-radius: 100vmax; background: var(--filete-suave); overflow: hidden; }
+.barra span { display: block; height: 100%; background: var(--acento); transition: width 0.6s var(--ease-salida); }
