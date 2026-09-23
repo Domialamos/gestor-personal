@@ -10,7 +10,7 @@
     "glosas": "node glosas-leer.mjs",
     "glosas-subir": "node glosas-escribir.mjs",
     "configurar-auto": "node configurar-auto.mjs",
-    "test": "node --test pruebas/"
+    "test": "node --test \"pruebas/**/*.test.mjs\""
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.112.3",

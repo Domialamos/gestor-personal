@@ -69,3 +69,23 @@ test("el cliente y asunto no vienen vacios", () => {
     assert.ok(f.cliente_asunto.length > 0, `#${f.id_trabajo} sin cliente/asunto`);
   }
 });
+
+test("las tildes y la enie no vienen con mojibake", () => {
+  // "Ã" y "Â" son la firma de bytes UTF-8 redecodificados como ISO-8859-1
+  // (p.ej. "Planificación" -> "PlanificaciÃ³n"). Si el fixture o el charset
+  // del navegador vuelven a desalinearse, esto tiene que fallar.
+  const mojibake = /[ÃÂ]/;
+  for (const f of filas) {
+    assert.ok(!mojibake.test(f.descripcion), `#${f.id_trabajo} con mojibake en descripcion: "${f.descripcion.slice(0, 40)}"`);
+    assert.ok(!mojibake.test(f.cliente_asunto), `#${f.id_trabajo} con mojibake en cliente_asunto: "${f.cliente_asunto}"`);
+  }
+
+  // Sin esto, la prueba de arriba pasaria igual con un fixture sin ninguna
+  // tilde ni enie: hay que confirmar que de verdad hay texto acentuado bien
+  // formado, no solo ausencia de la firma de mojibake.
+  const acentuado = /[áéíóúñÁÉÍÓÚÑ]/;
+  assert.ok(
+    filas.some((f) => acentuado.test(f.descripcion) || acentuado.test(f.cliente_asunto)),
+    "ninguna fila trae una tilde o enie bien formada; la prueba de mojibake no prueba nada"
+  );
+});
