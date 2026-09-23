@@ -65,7 +65,7 @@ confirmar en esta corrida como las de `procesadas_hoy`** que trajo `tb.mjs dia`
 las 19:00 y la de las 22:30 producen la misma nota del día completo, en vez de
 que una borre lo que dejó la otra.
 
-Esto importa porque cada nota se titula « Glosas del <día>» y lleva el total de
+Esto importa porque cada nota se titula “Glosas del <día>” y lleva el total de
 horas de **ese día**. Mezclar dos días en una nota hace que el encabezado y el
 total mientan. Además, al escribir también la nota de ayer en cada corrida, la
 de ayer queda corregida y completa sola.
