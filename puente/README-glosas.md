@@ -54,9 +54,11 @@ edicion**.
 
 ## El estilo lo dictan sus propias glosas
 
-`glosas-leer.mjs` trae hasta 6 glosas suyas de los ultimos 90 dias del mismo
-asunto y se las pasa al modelo como referencia. Eso importa mas que cualquier
-regla escrita: en "BSVV / Actividades Academicas" todas sus glosas abren con
+`tb.mjs ejemplos "<cliente / asunto>"` trae hasta 10 glosas suyas del mismo
+asunto de los ultimos 90 dias, cada una con su duracion al lado, y se las pasa
+al modelo como referencia. La duracion va a proposito: sin ella el modelo
+calibraba el largo de la glosa a ojo. Eso importa mas que cualquier regla
+escrita: en "BSVV / Actividades Academicas" todas sus glosas abren con
 "Financiamiento Vinedos Familia Chadwick:", y el modelo recoge esa convencion
 solo.
 
@@ -67,8 +69,9 @@ Rasgos de su estilo, observados el 26-08-2026:
 - Varias actuaciones encadenadas con "Asimismo, se...", "Por ultimo, se...".
 - El largo va con la duracion.
 
-Tambien se le pasan extractos de las notas de `Notas Claude/` que mencionen al
-cliente, como contexto adicional.
+Tambien se le pasan, por `tb.mjs contexto "<cliente>"`, las notas de `Notas
+Claude/` que mencionen al cliente, como contexto adicional. Van completas, no
+cortadas a 1200 caracteres como antes.
 
 ## El fallo mudo (corregido el 29-08-2026)
 
