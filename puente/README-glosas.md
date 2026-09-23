@@ -12,17 +12,17 @@ glosa de horas que ya existen.
 
 | Archivo | Que hace |
 |---|---|
-| `tb.mjs` | Sesion y lectura del listado. Compartido. |
-| `ejemplos.mjs` | Trae glosas pasadas (pagina de a 20 via el campo `desde`). |
-| `glosas-leer.mjs` | Busca el dia + ejemplos del mismo asunto -> `dia.json`. |
-| `redactar.mjs` | Llama a `claude -p` por stdin -> `glosas.json`. |
-| `glosas-escribir.mjs` | Edita via el formulario de TimeBilling y comprueba. |
-| `registro-glosas.mjs` | Registro de horas ya procesadas. |
-| `resumen.mjs` | Nota del dia en `Notas Claude/Glosas/`. |
-| `glosas-dia.cmd` | Repasa AYER y HOY; registro en `registro/`. |
+| `lib/listado.mjs` | Parseo del listado. Funcion pura que se inyecta en el navegador. |
+| `lib/sesion.mjs` | Sesion, busqueda y paginacion. Reintenta el arranque en frio. |
+| `lib/registro.mjs` | Registro de horas ya procesadas y verificadas. |
+| `lib/contexto.mjs` | Notas de la boveda que mencionan al cliente. |
+| `lib/nota.mjs` | Render de la nota diaria. |
+| `tb.mjs` | CLI: `dia`, `ejemplos`, `contexto`, `escribir`, `nota`. |
+| `glosas-agente.md` | El prompt del agente. |
+| `glosas-dia.cmd` | Lanza el agente; si muere, escribe la nota de fallo. |
+| `pruebas/` | `node --test`. El fixture es una pagina real guardada. |
 | `configurar-auto.mjs` | Abre la ventana de login sin pedir Enter. |
-| `avisar.mjs` | Avisa en el gestor cuando la rutina falla de verdad. |
-| `instalar-tarea.ps1` | Tarea de Windows: L-V 19:00 con reintentos, y al iniciar sesion. |
+| `instalar-tarea.ps1` | Tarea de Windows: diaria 19:00 con reintentos, y al iniciar sesion. |
 
 ## Por que repasa ayer
 
@@ -131,7 +131,20 @@ de linea que `cmd.exe` destroza.
 
 ```
 npm.cmd run configurar-auto        # una vez, y cuando caduque la sesion
-.\glosas-dia.cmd                   # el ciclo completo: ayer y hoy
-node glosas-leer.mjs 2026-08-25    # un dia puntual, sin modificar nada
-node ejemplos.mjs 01-07-2026 31-07-2026 "Maxagro"   # ver glosas pasadas
+npm.cmd test                       # la bateria de pruebas
+.\glosas-dia.cmd                   # la corrida completa: ayer y hoy
+node tb.mjs dia 2026-09-22         # un dia puntual, sin modificar nada
 ```
+
+## Por que se elimino avisar.mjs
+
+`avisar.mjs` intentaba crear una tarea en gestor-personal para avisar de un
+fallo, pero nunca pudo: `SUPABASE_SERVICE_ROLE_KEY` en `../.env.local` tiene
+cargada la clave anon, no la service role, y RLS rechaza la insercion (ver el
+"Pendiente" mas arriba). Por eso la tarea en el gestor jamas se creaba y cada
+corrida caia siempre al respaldo en la boveda —el archivo `AAAA-MM-DD —
+FALLO.md`. Ese respaldo termino siendo, en la practica, el unico canal que
+funcionaba, y es justo el que Dominga eligio como principal. Con eso claro,
+`avisar.mjs` sobraba: hoy el aviso de un fallo es, directamente, la nota diaria
+que escribe `glosas-dia.cmd` cuando el agente muere. No hay tarea en el gestor
+que crear ni clave que arreglar.

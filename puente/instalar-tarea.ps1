@@ -2,7 +2,7 @@
 # No necesita permisos de administrador: la tarea corre bajo tu propia sesion.
 #
 # Disparadores:
-#   - Lunes a viernes 19:00, reintentando cada 30 min hasta las 23:00.
+#   - Todos los dias 19:00, reintentando cada 30 min hasta las 23:00.
 #   - Al iniciar sesion (5 min despues), que recoge el dia anterior si el
 #     notebook estuvo apagado o fuera de la red del estudio toda la tarde.
 #
@@ -17,7 +17,7 @@ $nombre = "Glosas TimeBilling"
 $accion = New-ScheduledTaskAction -Execute $guion -WorkingDirectory $PSScriptRoot
 
 # Disparador de la tarde, con reintentos cada media hora durante 4 horas.
-$tarde = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday,Tuesday,Wednesday,Thursday,Friday -At 19:00
+$tarde = New-ScheduledTaskTrigger -Daily -At 19:00
 $patron = New-ScheduledTaskTrigger -Once -At (Get-Date) `
   -RepetitionInterval (New-TimeSpan -Minutes 30) `
   -RepetitionDuration (New-TimeSpan -Hours 4)
@@ -31,14 +31,14 @@ $inicio.Delay = "PT5M"
 $opciones = New-ScheduledTaskSettingsSet -StartWhenAvailable `
   -DontStopIfGoingOnBatteries -AllowStartIfOnBatteries `
   -MultipleInstances IgnoreNew `
-  -ExecutionTimeLimit (New-TimeSpan -Minutes 30)
+  -ExecutionTimeLimit (New-TimeSpan -Hours 2)
 
 Register-ScheduledTask -TaskName $nombre -Action $accion -Trigger $tarde,$inicio `
   -Settings $opciones -Description "Redacta y sube las glosas del dia en TimeBilling." -Force | Out-Null
 
 Write-Host ""
 Write-Host "Tarea '$nombre' registrada." -ForegroundColor Green
-Write-Host "  L-V 19:00, reintentando cada 30 min hasta las 23:00."
+Write-Host "  Todos los dias 19:00, reintentando cada 30 min hasta las 23:00."
 Write-Host "  Y al iniciar sesion, 5 min despues."
 Write-Host ""
 Write-Host "Para probarla ahora mismo:  Start-ScheduledTask -TaskName '$nombre'"
