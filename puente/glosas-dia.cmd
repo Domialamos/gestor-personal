@@ -11,8 +11,16 @@ REM CUIDADO: el prompt va a claude por stdin (<), nunca como argumento. Como
 REM argumento, cmd.exe destroza las comillas y los saltos de linea.
 REM
 REM --allowed-tools incluye Write ademas de Bash y Read: el agente arma un
-REM JSON temporal y se lo pasa a "tb.mjs nota" leyendo ese archivo, y sin
-REM Write no puede escribirlo. Sin este permiso la nota nunca se escribiria.
+REM JSON temporal y se lo pasa a "tb.mjs nota" leyendo ese archivo, y sin Write
+REM no puede escribirlo. Sin este permiso la nota nunca se escribiria.
+REM
+REM Va ACOTADO a "Write(registro/nota-*.json)" y no como Write suelto. Con Write
+REM suelto, registro/procesadas.json (el registro de lo ya verificado, la pieza
+REM que impide reescribir cada noche las glosas ya pulidas) quedaba a un Write de
+REM distancia, y la proteccion dependia de que el prompt no lo mencionara. El
+REM patron no lo alcanza, asi que ya no depende del silencio del prompt. La forma
+REM Tool(patron) con comodines es la que documenta esta version del CLI
+REM (claude.cmd --help: ejemplos "Bash(npm run build)", "Edit(docs/**)").
 REM
 REM CUIDADO: si "glosas-agente.md" no existe, la redireccion "< glosas-agente.md"
 REM falla ANTES de lanzar claude, y cmd.exe deja el errorlevel tal cual estaba
@@ -62,9 +70,37 @@ if not exist glosas-agente.md (
   goto fallo
 )
 
-call claude.cmd -p --allowed-tools "Bash(node tb.mjs *)" "Read" "Write" < glosas-agente.md >> "%LOG%" 2>&1
+call claude.cmd -p --allowed-tools "Bash(node tb.mjs *)" "Read" "Write(registro/nota-*.json)" < glosas-agente.md >> "%LOG%" 2>&1
 
-if errorlevel 1 goto fallo
+REM CUIDADO: el errorlevel de claude se guarda AQUI, en la primera linea
+REM despues del call. Cualquier comando intermedio (un echo, un if not exist,
+REM un for) lo pisa y la deteccion del fallo del agente se pierde: eso ya fue
+REM un bug y ya se arreglo una vez. El %ERRORLEVEL% se expande ANTES de que
+REM corra el set, asi que en SALIDA queda el codigo de claude aunque el propio
+REM set deje el errorlevel en cero.
+set "SALIDA=%ERRORLEVEL%"
+
+REM Se compara como texto en vez de "if errorlevel 1" porque asi tambien cae un
+REM codigo negativo: un crash de claude devuelve -1073741819, y "if errorlevel 1"
+REM solo mira mayor o igual que 1, asi que un crash pasaba por bueno.
+if not "%SALIDA%"=="0" goto fallo
+
+REM CUIDADO (Critical 3 de la revision final): que el agente salga 0 NO significa
+REM que haya escrito la nota. Las corridas del 22-09-2026 a las 21:58 y 22:01
+REM salieron 0 sin dejar nota y este archivo escribio LISTO.: la garantia de "la
+REM nota se escribe siempre" no existia, y esa es la firma exacta del fallo mudo
+REM de agosto de 2026 que costo dos dias de glosas.
+REM
+REM "nota --asegurar" comprueba la nota del dia y solo escribe la de fallo si
+REM falta; la ruta de la boveda y el dia en horario de Chile los sabe tb.mjs, no
+REM este archivo. Sale 1 si tuvo que escribirla, y entonces esta corrida es una
+REM corrida fallida: sale 1 para que la tarea de Windows reintente.
+call node tb.mjs nota --asegurar "El agente termino sin error pero no dejo la nota del dia" >> "%LOG%" 2>&1
+if errorlevel 1 (
+  echo. >> "%LOG%"
+  echo *** EL AGENTE SALIO 0 SIN DEJAR NOTA - se escribio la nota de fallo *** >> "%LOG%"
+  exit /b 1
+)
 
 echo. >> "%LOG%"
 echo LISTO. >> "%LOG%"
@@ -73,5 +109,8 @@ exit /b 0
 :fallo
 echo. >> "%LOG%"
 echo *** EL AGENTE TERMINO CON ERROR *** >> "%LOG%"
-call node tb.mjs nota --fallo "El agente termino con error y no alcanzo a escribir la nota" >> "%LOG%" 2>&1
+REM El motivo no afirma nada sobre la nota: puede que el agente la haya escrito
+REM antes de morir. Si ya hay nota del dia, --fallo la conserva y le agrega el
+REM aviso arriba; si no hay, escribe la nota minima de fallo.
+call node tb.mjs nota --fallo "El agente termino con error" >> "%LOG%" 2>&1
 exit /b 1
