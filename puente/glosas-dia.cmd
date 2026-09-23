@@ -30,6 +30,25 @@ REM chcp sin probarlo a fondo.
 cd /d "%~dp0"
 if not exist registro mkdir registro
 
+REM CUIDADO: mismo problema que la redireccion de entrada, pero con la de
+REM salida. Si "registro" no quedo disponible (el mkdir de arriba fallo por
+REM permisos o disco lleno, hay un archivo suelto llamado "registro", o una
+REM carpeta sincronizada que se pone rara), entonces ">> archivo" en una
+REM carpeta que no admite escritura falla EN SILENCIO y deja el errorlevel
+REM intacto: el "if errorlevel 1" de mas abajo nunca dispara, todo cae al
+REM bloque de LISTO. y el script sale 0 sin haber lanzado al agente y sin
+REM ninguna nota, ni buena ni de fallo. Por eso se prueba la escritura de
+REM verdad ANTES de apoyarse en el errorlevel para el resto de la logica: un
+REM nombre con %RANDOM% para no confundir un archivo viejo con una escritura
+REM que si funciono ahora mismo.
+set "SONDA=registro\.sonda-%RANDOM%.tmp"
+echo x > "%SONDA%" 2>nul
+if not exist "%SONDA%" (
+  call node tb.mjs nota --fallo "No se pudo escribir en registro\ (revisar permisos, disco o que sea una carpeta)"
+  exit /b 1
+)
+del "%SONDA%" >nul 2>&1
+
 for /f %%d in ('powershell -NoProfile -Command "(Get-Date).ToString('yyyy-MM-dd')"') do set "HOY=%%d"
 set "LOG=registro\%HOY%.txt"
 

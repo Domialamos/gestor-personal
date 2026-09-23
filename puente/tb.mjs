@@ -9,7 +9,7 @@
 // Salidas: 0 bien · 1 fallo tecnico · 2 sesion caducada.
 
 import "dotenv/config";
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { conSesion, buscarDia, leerTrabajos, traerRango, aDDMMYYYY, SesionCaida } from "./lib/sesion.mjs";
 import { leerRegistro, marcarProcesada } from "./lib/registro.mjs";
@@ -138,14 +138,42 @@ async function comandoEscribir(id, texto, fecha) {
   salir({ id_trabajo: Number(id), ...r });
 }
 
-function comandoNota(argumentos) {
-  let datos;
-  if (argumentos[0] === "--fallo") {
-    datos = { dia: hoy(), glosas: [], pendientes: [], cobradas: 0,
-      fallos: [argumentos[1] ?? "la corrida falló sin dejar motivo", "Detalle en puente/registro/" + hoy() + ".txt"] };
-  } else {
-    datos = JSON.parse(readFileSync(argumentos[0], "utf8"));
+// Exportada para poder probarla sin CLI ni process.exit (ver Fix round 1,
+// Critical 1). "glosas-agente.md" hace que el agente escriba la nota real
+// como su ULTIMO paso; si claude.cmd muere DESPUES de eso (turnos agotados,
+// herramienta fuera de --allowed-tools, un hipo al cerrar), glosas-dia.cmd
+// igual llama a "nota --fallo". Si esa llamada reemplazara la nota del dia
+// sin mirar, borraria el trabajo real de la corrida que si sirvio y lo
+// reemplazaria por "0 glosa(s) · fallo": el mismo dano que el bug de agosto
+// de 2026, en la direccion contraria (en vez de callar un fallo, inventa uno
+// y se come el trabajo real). Invariante: una corrida fallida NUNCA destruye
+// la nota de una corrida que si trabajo. Por eso, si ya hay nota del dia, no
+// se pisa: se le agrega el aviso al final, conservando todo lo anterior.
+export function escribirNotaFallo(motivo) {
+  const motivoFinal = motivo ?? "la corrida falló sin dejar motivo";
+  const detalle = "Detalle en puente/registro/" + hoy() + ".txt";
+  mkdirSync(BOVEDA, { recursive: true });
+  const archivo = join(BOVEDA, `${hoy()}.md`);
+
+  if (existsSync(archivo)) {
+    const previo = readFileSync(archivo, "utf8").replace(/\s+$/, "");
+    const aviso = `\n\n---\n\n> ⚠️ ${motivoFinal}\n\n> ⚠️ ${detalle}\n`;
+    writeFileSync(archivo, previo + aviso);
+    return { archivo, agregado: true };
   }
+
+  const datos = { dia: hoy(), glosas: [], pendientes: [], cobradas: 0, fallos: [motivoFinal, detalle] };
+  writeFileSync(archivo, renderNota(datos));
+  return { archivo, agregado: false };
+}
+
+function comandoNota(argumentos) {
+  if (argumentos[0] === "--fallo") {
+    const { archivo } = escribirNotaFallo(argumentos[1]);
+    salir({ archivo });
+    return;
+  }
+  const datos = JSON.parse(readFileSync(argumentos[0], "utf8"));
   mkdirSync(BOVEDA, { recursive: true });
   const archivo = join(BOVEDA, `${datos.dia}.md`);
   writeFileSync(archivo, renderNota(datos));
