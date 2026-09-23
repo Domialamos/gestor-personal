@@ -33,14 +33,16 @@ export function renderNota({ dia, glosas = [], pendientes = [], cobradas = 0, fa
   for (const p of pendientes) {
     l.push(`## ${p.cliente_asunto || "(sin asunto)"} — ${p.duracion ?? "?"}   ⚠️ NO SE PUDO GUARDAR`, "");
     l.push(`**Apunte:** ${p.apunte || "(vacío)"}`, "");
-    l.push(p.glosa, "");
-    l.push(`> ${p.motivo}. La hora sigue sin esta glosa en TimeBilling.`, "");
+    l.push(p.glosa || "(no quedó texto redactado)", "");
+    // Sin el valor por defecto, una pendiente sin motivo imprimia
+    // "undefined. La hora sigue sin esta glosa" en el unico canal que ella lee.
+    l.push(`> ${p.motivo || "falló al guardar sin dejar motivo"}. La hora sigue sin esta glosa en TimeBilling.`, "");
   }
 
   for (const g of glosas) {
     l.push(`## ${g.cliente_asunto || "(sin asunto)"} — ${g.duracion ?? "?"}`, "");
     l.push(`**Apunte:** ${g.apunte || "(vacío)"}`, "");
-    l.push(g.glosa, "");
+    l.push(g.glosa || "(sin texto)", "");
   }
 
   if (cobradas) l.push(`> ${cobradas} hora(s) ya cobrada(s) no se tocaron.`, "");

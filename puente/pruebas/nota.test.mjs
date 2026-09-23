@@ -62,3 +62,21 @@ test("el frontmatter lleva la fecha y los tags", () => {
   const md = renderNota(base);
   assert.match(md, /tags: \[timebilling, glosas\]/);
 });
+
+test("una pendiente sin motivo no imprime undefined en la nota", () => {
+  // M4: p.motivo se interpolaba sin valor por defecto, y la nota —el unico canal
+  // que ella lee— terminaba diciendo "undefined. La hora sigue sin esta glosa".
+  const md = renderNota({ ...base, pendientes: [
+    { cliente_asunto: "Maxagro / DD", duracion: "1:45", apunte: "revision titulos", glosa: "Revisión de los títulos." },
+  ]});
+  assert.ok(!md.includes("undefined"), "la nota no puede decir undefined");
+  assert.match(md, /falló al guardar sin dejar motivo/);
+});
+
+test("una pendiente sin texto redactado lo dice, en vez de imprimir undefined", () => {
+  const md = renderNota({ ...base, pendientes: [
+    { cliente_asunto: "Maxagro / DD", duracion: "1:45", apunte: "revision titulos", motivo: "falló dos veces" },
+  ]});
+  assert.ok(!md.includes("undefined"));
+  assert.match(md, /no quedó texto redactado/);
+});
