@@ -48,10 +48,18 @@ export async function abrirSesion({ headless = true } = {}) {
 export async function estaFuera(pagina) {
   // Por la URL no se puede: la pantalla de acceso vive en /time_tracking/ y no
   // dice "login" en ninguna parte. Se detecta por el campo de contrasena.
+  //
+  // Ojo: si evaluate() revienta (pagina caida, contexto destruido durante un
+  // arranque en frio) eso es un fallo TECNICO, no una sesion caducada. Antes
+  // se atrapaba con .catch(() => true) y se devolvia "esta fuera", lo que
+  // hacia que buscarDia lanzara SesionCaida y conReintento cortara el
+  // reintento de inmediato (ve su guarda `if (e instanceof SesionCaida)`) en
+  // vez de relanzar el navegador — justo el escenario que este modulo existe
+  // para resolver. Por eso el error se deja propagar tal cual.
   return pagina.evaluate(() => {
     if (document.querySelector('input[type="password"]')) return true;
     return /Ingresa tus credenciales|¿Olvidaste tu contrase/i.test(document.body?.innerText ?? "");
-  }).catch(() => true);
+  });
 }
 
 export async function buscarDia(pagina, { url, idUsuario, desde, hasta }) {
