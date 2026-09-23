@@ -46,7 +46,7 @@ Para cada uno de los dos días:
 5. Nunca digas que una glosa quedó guardada si `escribir` no te dijo
    `confirmada: true`.
 
-Al terminar los dos días, escribe un solo archivo JSON temporal y pásaselo a
+Al terminar cada día, escribe un archivo JSON temporal y pásaselo a
 `node tb.mjs nota`. Su forma:
 
 {
@@ -57,14 +57,18 @@ Al terminar los dos días, escribe un solo archivo JSON temporal y pásaselo a
   "fallos": ["Repaso del AAAA-MM-DD: falló al leer (sesión caducada)."]
 }
 
-El array `glosas` lleva **tanto las horas que acabas de confirmar en esta
-corrida como las de `procesadas_hoy`** que trajo `tb.mjs dia` del día de hoy
+Haz una llamada a `node tb.mjs nota` por cada día procesado: primero con la nota
+de ayer, después con la de hoy. El campo `dia` en cada JSON debe ser la fecha de
+**ese día**, y el array `glosas` debe llevar **tanto las horas que acabas de
+confirmar en esta corrida como las de `procesadas_hoy`** que trajo `tb.mjs dia`
 (horas ya guardadas en una corrida anterior del mismo día). Así la corrida de
 las 19:00 y la de las 22:30 producen la misma nota del día completo, en vez de
 que una borre lo que dejó la otra.
 
-El `dia` de la nota es **hoy**. Lo que haya pasado con el repaso de ayer va en
-`fallos` si falló, y sus glosas van en `glosas` si salieron bien.
+Esto importa porque cada nota se titula « Glosas del <día>» y lleva el total de
+horas de **ese día**. Mezclar dos días en una nota hace que el encabezado y el
+total mientan. Además, al escribir también la nota de ayer en cada corrida, la
+de ayer queda corregida y completa sola.
 
 ## Cómo redactar
 
