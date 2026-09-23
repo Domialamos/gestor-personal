@@ -57,6 +57,12 @@ Al terminar los dos días, escribe un solo archivo JSON temporal y pásaselo a
   "fallos": ["Repaso del AAAA-MM-DD: falló al leer (sesión caducada)."]
 }
 
+El array `glosas` lleva **tanto las horas que acabas de confirmar en esta
+corrida como las de `procesadas_hoy`** que trajo `tb.mjs dia` del día de hoy
+(horas ya guardadas en una corrida anterior del mismo día). Así la corrida de
+las 19:00 y la de las 22:30 producen la misma nota del día completo, en vez de
+que una borre lo que dejó la otra.
+
 El `dia` de la nota es **hoy**. Lo que haya pasado con el repaso de ayer va en
 `fallos` si falló, y sus glosas van en `glosas` si salieron bien.
 

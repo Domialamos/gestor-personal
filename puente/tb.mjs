@@ -44,6 +44,36 @@ export async function verificarGuardado(pagina, { id, textoEnviado, dia, archivo
   return { confirmada: true, guardado: actual.descripcion, motivo: null };
 }
 
+// Arma la salida de "dia" a partir de las filas del listado y el registro de
+// procesadas. Separada de comandoDia para poder probarla sin navegador.
+//
+// procesadas_hoy existe porque la nota diaria es el UNICO canal por el que
+// Dominga se entera de lo que paso, y la tarea de Windows reintenta cada 30
+// minutos: sin esto, una corrida que no encuentra nada nuevo que hacer no
+// tiene como incluir en la nota las horas que ya quedaron listas en una
+// corrida anterior del mismo dia, y termina pisandola con una nota vacia.
+//
+// La fila del listado (no el campo "dia" del registro) es la fuente de verdad
+// de que la hora es del dia consultado: el registro solo aporta la glosa.
+export function armarResumenDia(todos, procesadas) {
+  const editables = todos.filter((t) => t.editable);
+  const cobradas = todos.length - editables.length;
+  const pendientes = editables.filter((t) => !procesadas[String(t.id_trabajo)]);
+  const hechas = editables.filter((t) => procesadas[String(t.id_trabajo)]);
+
+  const trabajos = pendientes.map((t) => ({
+    id_trabajo: t.id_trabajo, duracion: t.duracion,
+    cliente_asunto: t.cliente_asunto, apunte: t.descripcion,
+  }));
+  const procesadas_hoy = hechas.map((t) => ({
+    id_trabajo: t.id_trabajo, duracion: t.duracion,
+    cliente_asunto: t.cliente_asunto, apunte: t.descripcion,
+    glosa: procesadas[String(t.id_trabajo)]?.glosa ?? "",
+  }));
+
+  return { trabajos, cobradas, ya_procesadas: hechas.length, procesadas_hoy };
+}
+
 async function comandoDia(fecha) {
   const f = aDDMMYYYY(fecha);
   const todos = await conSesion(async (pagina) => {
@@ -51,15 +81,8 @@ async function comandoDia(fecha) {
     return leerTrabajos(pagina);
   });
   const procesadas = leerRegistro();
-  const cobradas = todos.filter((t) => !t.editable).length;
-  const yaHechas = todos.filter((t) => t.editable && procesadas[String(t.id_trabajo)]).length;
-  const trabajos = todos
-    .filter((t) => t.editable && !procesadas[String(t.id_trabajo)])
-    .map((t) => ({
-      id_trabajo: t.id_trabajo, duracion: t.duracion,
-      cliente_asunto: t.cliente_asunto, apunte: t.descripcion,
-    }));
-  salir({ dia: fecha, trabajos, cobradas, ya_procesadas: yaHechas });
+  const { trabajos, cobradas, ya_procesadas, procesadas_hoy } = armarResumenDia(todos, procesadas);
+  salir({ dia: fecha, trabajos, cobradas, ya_procesadas, procesadas_hoy });
 }
 
 async function comandoEjemplos(asunto, fecha) {
