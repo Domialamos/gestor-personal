@@ -89,3 +89,25 @@ test("las tildes y la enie no vienen con mojibake", () => {
     "ninguna fila trae una tilde o enie bien formada; la prueba de mojibake no prueba nada"
   );
 });
+
+test("la fecha viene DD/MM/AA con barras, no en el formato de aDDMMYYYY", () => {
+  // Es el hueco por donde paso I1: comandoEjemplos comparaba esta celda contra
+  // aDDMMYYYY ("23-09-2026") para excluir el propio dia, y nunca calzaba. Si
+  // algun dia TimeBilling cambia este formato, que se entere una prueba y no el
+  // filtro en silencio.
+  for (const f of filas) {
+    assert.match(f.fecha, /^\d{2}\/\d{2}\/\d{2}$/, `fecha rara en #${f.id_trabajo}: "${f.fecha}"`);
+    assert.doesNotMatch(f.fecha, /^\d{2}-\d{2}-\d{4}$/, "si la celda pasara a DD-MM-AAAA hay que revisar quien la compara");
+  }
+});
+
+test("el parseo colapsa el espacio de una glosa de varias lineas", () => {
+  // #564518 en el fixture es un parrafo seguido de una lista de catorce
+  // documentos, con saltos de linea de verdad en el HTML. El listado la entrega
+  // colapsada, y por eso igual() tiene que normalizar los dos lados (C5).
+  const conLista = filas.find((f) => f.id_trabajo === 564518);
+  assert.ok(conLista, "el fixture tiene que traer #564518: es la glosa con lista");
+  assert.ok(!/\n/.test(conLista.descripcion), "el listado entrega la glosa sin saltos de linea");
+  assert.match(conLista.descripcion, /Matriz de riesgos Modelo de Prevención de Delitos/,
+    "dos renglones del HTML llegan pegados por un espacio");
+});
