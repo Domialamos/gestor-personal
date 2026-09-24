@@ -40,9 +40,13 @@ Para cada uno de los dos días:
    - `pisadas`: horas cuya glosa ya confirmada desapareció de TimeBilling porque
      TimeBillingX (la app de escritorio) restauró su apunte. Vienen otra vez en
      `trabajos`, con el campo `glosa_anterior`.
-   - `divergencias`: horas cuyo texto en TimeBilling no es la glosa que se guardó
-     ni el apunte. No se tocan: lo más probable es que Dominga las haya
-     corregido a mano.
+   - `divergencias`: horas cuyo texto en TimeBilling no es la glosa que se
+     guardó. No se tocan nunca. Cada una trae su propio campo `motivo`, y hay dos
+     casos distintos que **no** debes confundir: si hay apunte registrado, el
+     texto no es ni la glosa ni el apunte, así que alguien la editó a mano —lo
+     más probable, Dominga—; si no hay apunte registrado, simplemente **no se
+     puede saber** quién la cambió. Usa el `motivo` que viene en el JSON, no
+     inventes la causa.
 
    **Aunque `trabajos` venga vacío, el día siempre termina con su nota** (paso
    6): `procesadas_hoy` puede traer el trabajo de una corrida anterior, y sin
@@ -90,8 +94,11 @@ En `fallos` va una línea por cada problema del día, además de los técnicos:
 
 - por cada hora de `pisadas`: "#623011 (7:15): TimeBillingX había restaurado el
   apunte y la glosa guardada se perdió; se volvió a escribir."
-- por cada hora de `divergencias`: "#623011 (7:15): el texto en TimeBilling no es
-  la glosa que se guardó ni el apunte, así que se dejó como está."
+- por cada hora de `divergencias`: el texto tal cual viene en su campo `motivo`,
+  precedido por la hora y la duración, y cerrando con que se dejó como está. Por
+  ejemplo: "#623011 (7:15): la glosa guardada no coincide y no hay apunte
+  registrado para saber quién la cambió; se dejó como está." **No uses una frase
+  fija para todas**: el motivo de cada una dice qué se sabe y qué no.
 
 Haz una llamada a `node tb.mjs nota` por cada día procesado: primero con la nota
 de ayer, después con la de hoy. El campo `dia` en cada JSON debe ser la fecha de
