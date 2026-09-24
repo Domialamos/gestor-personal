@@ -12,7 +12,8 @@
 
 import "dotenv/config";
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { conSesion, buscarDia, leerTrabajos, traerRango, aDDMMYYYY, SesionCaida } from "./lib/sesion.mjs";
 import { leerRegistro, marcarProcesada } from "./lib/registro.mjs";
 import { renderNota } from "./lib/nota.mjs";
@@ -361,8 +362,15 @@ function comandoNota(argumentos) {
 
 const [comando, ...resto] = process.argv.slice(2);
 
-// El import desde las pruebas no debe ejecutar el CLI.
-if (comando) {
+// El CLI arranca SOLO cuando este archivo es el que se ejecuto, no cuando otro
+// modulo lo importa. Mirar unicamente si hay argumentos no basta: los argumentos
+// son los del proceso, asi que un script que importe `igual` y reciba los suyos
+// hacia que el CLI intentara ejecutarlos y saliera con codigo 1. Paso de verdad
+// el 24-09-2026 con el script del backfill.
+const esteArchivo = fileURLToPath(import.meta.url);
+const ejecutadoDirecto = process.argv[1] && resolve(process.argv[1]) === resolve(esteArchivo);
+
+if (ejecutadoDirecto && comando) {
   try {
     if (!TB_URL || !TB_ID_USUARIO) throw new Error("Faltan TB_URL o TB_ID_USUARIO en puente/.env");
     switch (comando) {
