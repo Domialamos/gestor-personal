@@ -34,10 +34,13 @@ verificadas en TimeBilling**, no las meramente enviadas.
 ## TimeBillingX pisa la glosa (confirmado el 23-09-2026)
 
 El pendiente de agosto —si la app de escritorio restaura su propia descripcion al
-re-sincronizar— quedo confirmado con tres casos reales: #621293 (10-09), #623011 (21-09) y
-#623516 (22-09) estaban en `registro/procesadas.json` con su glosa buena y en
-TimeBilling habia quedado el apunte crudo ("Informe de Brchas", "Informe Pampa" y
-"Informfe de brechas y envio de borrador"). En las dos, la duracion cambio DESPUES de la
+re-sincronizar— quedo confirmado. #623011 (21-09) y #623516 (22-09) estaban en
+`registro/procesadas.json` con su glosa buena y en TimeBilling habia quedado el
+apunte crudo ("Informe Pampa" y "Informfe de brechas y envio de borrador"); las
+dos se repararon a mano el 24-09-2026. El log del 10-09 registra un tercer caso,
+#621293, que al revisarlo ya se habia recuperado solo: la pisada puede ser
+transitoria si una corrida posterior alcanza a reescribir antes de que la hora
+salga de la ventana de ayer/hoy. En las dos, la duracion cambio DESPUES de la
 escritura verificada (00:00 a 07:15 y 00:50 a 01:20): TimeBillingX re-empujo la
 fila.
 
