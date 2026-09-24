@@ -12,17 +12,17 @@ glosa de horas que ya existen.
 
 | Archivo | Que hace |
 |---|---|
-| `tb.mjs` | Sesion y lectura del listado. Compartido. |
-| `ejemplos.mjs` | Trae glosas pasadas (pagina de a 20 via el campo `desde`). |
-| `glosas-leer.mjs` | Busca el dia + ejemplos del mismo asunto -> `dia.json`. |
-| `redactar.mjs` | Llama a `claude -p` por stdin -> `glosas.json`. |
-| `glosas-escribir.mjs` | Edita via el formulario de TimeBilling y comprueba. |
-| `registro-glosas.mjs` | Registro de horas ya procesadas. |
-| `resumen.mjs` | Nota del dia en `Notas Claude/Glosas/`. |
-| `glosas-dia.cmd` | Repasa AYER y HOY; registro en `registro/`. |
+| `lib/listado.mjs` | Parseo del listado. Funcion pura que se inyecta en el navegador. |
+| `lib/sesion.mjs` | Sesion, busqueda y paginacion. Reintenta el arranque en frio. |
+| `lib/registro.mjs` | Registro de horas ya procesadas y verificadas. |
+| `lib/contexto.mjs` | Notas de la boveda que mencionan al cliente. |
+| `lib/nota.mjs` | Render de la nota diaria. |
+| `tb.mjs` | CLI: `dia`, `ejemplos`, `contexto`, `escribir`, `nota` (y `nota --fallo` / `nota --asegurar`). |
+| `glosas-agente.md` | El prompt del agente. |
+| `glosas-dia.cmd` | Lanza el agente; si muere, escribe la nota de fallo. |
+| `pruebas/` | `node --test`. El fixture es una pagina real guardada. |
 | `configurar-auto.mjs` | Abre la ventana de login sin pedir Enter. |
-| `avisar.mjs` | Avisa en el gestor cuando la rutina falla de verdad. |
-| `instalar-tarea.ps1` | Tarea de Windows: L-V 19:00 con reintentos, y al iniciar sesion. |
+| `instalar-tarea.ps1` | Tarea de Windows: diaria 19:00 con reintentos, y al iniciar sesion. |
 
 ## Por que repasa ayer
 
@@ -30,6 +30,39 @@ Hay dias en que Dominga termina despues de las 19:00. La corrida siguiente
 recoge lo que quedo suelto. Para que eso no reescriba glosas ya pulidas cada
 noche, `registro/procesadas.json` anota las horas ya subidas **y solo las
 verificadas en TimeBilling**, no las meramente enviadas.
+
+## TimeBillingX pisa la glosa (confirmado el 23-09-2026)
+
+El pendiente de agosto —si la app de escritorio restaura su propia descripcion al
+re-sincronizar— quedo confirmado. #623011 (21-09) y #623516 (22-09) estaban en
+`registro/procesadas.json` con su glosa buena y en TimeBilling habia quedado el
+apunte crudo ("Informe Pampa" y "Informfe de brechas y envio de borrador"); las
+dos se repararon a mano el 24-09-2026. El log del 10-09 registra un tercer caso,
+#621293, que al revisarlo ya se habia recuperado solo: la pisada puede ser
+transitoria si una corrida posterior alcanza a reescribir antes de que la hora
+salga de la ventana de ayer/hoy. En las dos, la duracion cambio DESPUES de la
+escritura verificada (00:00 a 07:15 y 00:50 a 01:20): TimeBillingX re-empujo la
+fila.
+
+Como el registro es de una sola escritura, eso volvia el dano permanente y mudo:
+`armarResumenDia` excluia para siempre de `trabajos` toda hora registrada sin
+volver a mirar su texto. Ahora compara la glosa del registro con el texto vivo
+del listado:
+
+**Ojo con el alcance:** la deteccion solo mira ayer y hoy, porque es lo que el
+agente repasa. Una glosa que se perdio hace semanas —como #621293, del 10-09— no
+la va a recuperar ninguna corrida: hay que repararla a mano. El barrido de los
+logs encuentra solo las que dejaron un `NO COINCIDE`, asi que puede haber mas
+antiguas sin registrar.
+
+- si el texto vivo es el apunte que el registro guardo al escribir, fue
+  TimeBillingX: la hora vuelve a `trabajos` con `glosa_anterior` para reponer la
+  MISMA glosa, y sale en `pisadas` para que la nota lo diga;
+- si no es la glosa ni el apunte, fue alguien mas (lo mas probable, Dominga a
+  mano): no se toca y sale en `divergencias`.
+
+Lo de fondo sigue en pie: **conviene correr la rutina con TimeBillingX cerrado.**
+Esto solo repara la deriva, no la evita.
 
 ## Como funciona de verdad (verificado el 26-08-2026)
 
@@ -54,11 +87,18 @@ edicion**.
 
 ## El estilo lo dictan sus propias glosas
 
-`glosas-leer.mjs` trae hasta 6 glosas suyas de los ultimos 90 dias del mismo
-asunto y se las pasa al modelo como referencia. Eso importa mas que cualquier
-regla escrita: en "BSVV / Actividades Academicas" todas sus glosas abren con
-"Financiamiento Vinedos Familia Chadwick:", y el modelo recoge esa convencion
-solo.
+`tb.mjs ejemplos "<cliente / asunto>"` trae hasta 10 glosas suyas del mismo
+asunto de los ultimos 90 dias, cada una con su duracion al lado, y se las pasa
+al modelo como referencia. La duracion va a proposito: sin ella el modelo
+calibraba el largo de la glosa a ojo. Que el estilo salga de sus propias glosas
+importa mas que cualquier regla escrita del prompt.
+
+OJO con un ejemplo que este README daba antes: que "todas sus glosas de BSVV /
+Actividades Academicas abren con Financiamiento Vinedos Familia Chadwick" NO era
+una convencion suya, era un artefacto del `cliente_asunto` mal parseado del
+codigo viejo, que metia el asunto dentro del texto de la glosa. No sirve como
+prueba de que el mecanismo funciona y no hay que leerlo como una regla de estilo.
+Los ejemplos se eligen por asunto y por largo, no por como empiezan.
 
 Rasgos de su estilo, observados el 26-08-2026:
 - Frase **nominal** de apertura ("Revision de...", "Preparacion de..."), nunca
@@ -67,8 +107,9 @@ Rasgos de su estilo, observados el 26-08-2026:
 - Varias actuaciones encadenadas con "Asimismo, se...", "Por ultimo, se...".
 - El largo va con la duracion.
 
-Tambien se le pasan extractos de las notas de `Notas Claude/` que mencionen al
-cliente, como contexto adicional.
+Tambien se le pasan, por `tb.mjs contexto "<cliente>"`, las notas de `Notas
+Claude/` que mencionen al cliente, como contexto adicional. Van completas, no
+cortadas a 1200 caracteres como antes.
 
 ## El fallo mudo (corregido el 29-08-2026)
 
@@ -93,13 +134,22 @@ Tres cambios, no uno:
    hasta las 23:00 y hace una pasada al iniciar sesion. Reintentar no cuesta:
    `procesadas.json` deja intactas las glosas ya pulidas, y de paso recoge las
    horas cargadas despues de las 19:00.
-3. **El aviso llega.** `avisar.mjs` crea una tarea en el gestor con fecha de hoy
-   —sale en "No olvidar" del hub y en el telefono— al **tercer** fallo seguido,
-   para que un corte de red pasajero no moleste. Si el gestor no esta
-   alcanzable, el aviso queda encolado en `registro/aviso-pendiente.json` y se
-   despacha en el reintento siguiente; ademas deja `AAAA-MM-DD — FALLO.md` en la
-   boveda como respaldo. Cuando una corrida sale bien, `avisar.mjs --ok` cierra
-   la tarea y retira la nota.
+3. **El aviso.** Se intento avisar por el gestor: `avisar.mjs` creaba una tarea
+   con fecha de hoy al tercer fallo seguido y, si el gestor no estaba
+   alcanzable, dejaba `AAAA-MM-DD — FALLO.md` en la boveda como respaldo. Ese
+   canal **ya no existe**: `avisar.mjs` se elimino y hoy el unico aviso es la
+   nota diaria de la boveda, que escribe el agente o, si el agente muere,
+   `glosas-dia.cmd` a traves de `tb.mjs nota --fallo` / `--asegurar`. Ver "Por
+   que se elimino avisar.mjs" al final.
+
+**Volvio a aparecer, y por otra puerta (23-09-2026).** El `.cmd` solo llamaba a
+`tb.mjs nota --fallo` cuando `claude` salia distinto de cero. Si el agente salia
+**0** sin haber llamado nunca a `tb.mjs nota` —las corridas del 22-09 a las
+21:58 y 22:01— no quedaba nota, no quedaba ⚠️, y el `.cmd` escribia `LISTO.`:
+exactamente la misma firma. Ahora, despues del `call claude.cmd`, el `.cmd`
+guarda el errorlevel en la linea siguiente (cualquier comando intermedio lo
+pisaria) y llama a `tb.mjs nota --asegurar`, que escribe la nota de fallo solo si
+falta y sale 1 en ese caso para que la tarea de Windows reintente.
 
 De paso salieron dos defectos que el fallo mudo tapaba:
 
@@ -110,14 +160,16 @@ De paso salieron dos defectos que el fallo mudo tapaba:
 - `redactar.mjs` guardaba la glosa con el espacio inicial que a veces devuelve el
   modelo. Ese espacio se facturaba tal cual: ahora se hace `trim()`.
 
-### Pendiente
+### Lo que quedo de eso (cerrado el 22-09-2026)
 
-`avisar.mjs` todavia no puede crear la tarea: la variable
+`avisar.mjs` nunca llego a crear la tarea: la variable
 `SUPABASE_SERVICE_ROLE_KEY` de `../.env.local` contiene **la clave anon**, no la
-service role (se ve decodificando el JWT: `role: anon`), y RLS rechaza la
-insercion. Mientras no se corrija, el aviso cae en la boveda por el respaldo.
-Vale la pena revisar la misma variable en Vercel: si alla esta igual, el buzon de
-correo (`/api/correo`) y los crons fallan del mismo modo.
+service role (se ve decodificando el JWT: `role: anon`), y RLS rechazaba la
+insercion. No se arreglo: se elimino la pieza, porque su plan B era el plan A
+(ver "Por que se elimino avisar.mjs"). Lo que sigue valiendo la pena es revisar
+esa misma variable en Vercel: si alla esta igual, el buzon de correo
+(`/api/correo`) y los crons fallan del mismo modo. Eso es del gestor, no de esta
+rutina.
 
 ## Windows, dos trampas
 
@@ -131,7 +183,20 @@ de linea que `cmd.exe` destroza.
 
 ```
 npm.cmd run configurar-auto        # una vez, y cuando caduque la sesion
-.\glosas-dia.cmd                   # el ciclo completo: ayer y hoy
-node glosas-leer.mjs 2026-08-25    # un dia puntual, sin modificar nada
-node ejemplos.mjs 01-07-2026 31-07-2026 "Maxagro"   # ver glosas pasadas
+npm.cmd test                       # la bateria de pruebas
+.\glosas-dia.cmd                   # la corrida completa: ayer y hoy
+node tb.mjs dia 2026-09-22         # un dia puntual, sin modificar nada
 ```
+
+## Por que se elimino avisar.mjs
+
+`avisar.mjs` intentaba crear una tarea en gestor-personal para avisar de un
+fallo, pero nunca pudo: `SUPABASE_SERVICE_ROLE_KEY` en `../.env.local` tiene
+cargada la clave anon, no la service role, y RLS rechaza la insercion (ver el
+"Lo que quedo de eso" mas arriba). Por eso la tarea en el gestor jamas se creaba y cada
+corrida caia siempre al respaldo en la boveda —el archivo `AAAA-MM-DD —
+FALLO.md`. Ese respaldo termino siendo, en la practica, el unico canal que
+funcionaba, y es justo el que Dominga eligio como principal. Con eso claro,
+`avisar.mjs` sobraba: hoy el aviso de un fallo es, directamente, la nota diaria
+que escribe `glosas-dia.cmd` cuando el agente muere. No hay tarea en el gestor
+que crear ni clave que arreglar.
