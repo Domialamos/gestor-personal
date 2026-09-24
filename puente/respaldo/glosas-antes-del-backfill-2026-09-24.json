@@ -1,0 +1,1100 @@
+[
+  {
+    "id_trabajo": 617213,
+    "fecha": "25/08/26",
+    "cliente_asunto": "Food Group / Asesoría general",
+    "duracion": "02:00",
+    "cobrable": true,
+    "descripcion": "Continuación del Due Diligence de Laboratorio Boston S.A. y Boston Manufacturing SpA, revisando y actualizando el informe de Due Diligence, con especial énfasis en la modificación de la sección de compliance.",
+    "editable": false
+  },
+  {
+    "id_trabajo": 617214,
+    "fecha": "25/08/26",
+    "cliente_asunto": "Viñedos Familia Chadwick / Crédito Sindicado",
+    "duracion": "03:05",
+    "cobrable": true,
+    "descripcion": "Financiamiento Viñedos Familia Chadwick: elaboración del informe de títulos de los inmuebles involucrados en la operación, revisando la cadena de dominio, gravámenes, prohibiciones e hipotecas vigentes, y verificando la concordancia de los antecedentes registrales con la documentación de la operación.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 617263,
+    "fecha": "25/08/26",
+    "cliente_asunto": "INGEVEC Inmobiliaria / Financiamientos",
+    "duracion": "00:05",
+    "cobrable": true,
+    "descripcion": "BTG- revisión preliminar del correo remitido por Banco BTG con las observaciones formuladas al proceso de actualización de los prepagos elaborados.",
+    "editable": false
+  },
+  {
+    "id_trabajo": 617486,
+    "fecha": "25/08/26",
+    "cliente_asunto": "Southern Copper Corporation / Modelos de Prevención",
+    "duracion": "00:10",
+    "cobrable": true,
+    "descripcion": "Se elabora solicitud de antecedentes.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 617665,
+    "fecha": "25/08/26",
+    "cliente_asunto": "Empresas Maxagro / Actualización MPD",
+    "duracion": "00:10",
+    "cobrable": true,
+    "descripcion": "Preparación Capacitación del Modelo de Prevención de Delitos a realizar en Chillán.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 620402,
+    "fecha": "25/08/26",
+    "cliente_asunto": "Viñedos Familia Chadwick / Crédito Sindicado",
+    "duracion": "03:05",
+    "cobrable": true,
+    "descripcion": "Financiamiento Viñedos Familia Chadwick: elaboración del informe de títulos de los inmuebles involucrados en la operación, revisando la cadena de dominio, gravámenes, prohibiciones e hipotecas vigentes, y verificando la concordancia de los antecedentes registrales con la documentación de la operación.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 617537,
+    "fecha": "26/08/26",
+    "cliente_asunto": "Empresas Maxagro / Actualización MPD",
+    "duracion": "00:35",
+    "cobrable": true,
+    "descripcion": "Preparación capacitación Chillán y modiifcacones a presentación power point para capacitación Pichidegua.",
+    "editable": false
+  },
+  {
+    "id_trabajo": 617545,
+    "fecha": "26/08/26",
+    "cliente_asunto": "Southern Copper Corporation / Modelos de Prevención",
+    "duracion": "00:45",
+    "cobrable": true,
+    "descripcion": "Solicitud de antecedentes adicionales para la actualización del Modelo de Prevención de Delitos, el Programa de Libre Competencia y el Modelo de Protección de Datos Personales.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 617548,
+    "fecha": "26/08/26",
+    "cliente_asunto": "Viñedos Familia Chadwick / Crédito Sindicado",
+    "duracion": "03:05",
+    "cobrable": true,
+    "descripcion": "Financiamiento Viñedos Familia Chadwick: elaboración del informe de títulos de los inmuebles involucrados en la operación, revisando la cadena de dominio, gravámenes, prohibiciones e hipotecas vigentes, y verificando la concordancia de los antecedentes registrales con la documentación de la operación.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 617662,
+    "fecha": "26/08/26",
+    "cliente_asunto": "Empresas Maxagro / Actualización MPD",
+    "duracion": "00:55",
+    "cobrable": true,
+    "descripcion": "Preparación de la capacitación del Modelo de Prevención de Delitos de Empresas Maxagro a realizar en Chillán.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 617664,
+    "fecha": "26/08/26",
+    "cliente_asunto": "ICARE / Asesoría general",
+    "duracion": "00:10",
+    "cobrable": true,
+    "descripcion": "Revisión y envío de la versión final del Convenio de Socio Colaborador a suscribirse entre ICARE y Clínica Alemana.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 620403,
+    "fecha": "26/08/26",
+    "cliente_asunto": "Viñedos Familia Chadwick / Crédito Sindicado",
+    "duracion": "03:05",
+    "cobrable": true,
+    "descripcion": "Financiamiento Viñedos Familia Chadwick: elaboración del informe de títulos de los inmuebles involucrados en la operación, revisando la cadena de dominio, gravámenes, prohibiciones e hipotecas vigentes, y verificando la concordancia de los antecedentes registrales con la documentación de la operación.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 617986,
+    "fecha": "27/08/26",
+    "cliente_asunto": "Empresas Maxagro / Actualización MPD",
+    "duracion": "04:30",
+    "cobrable": true,
+    "descripcion": "Preparación y realización de capacitación presencial del Modelo de Prevención de Delitos a jefaturas y áreas de Empresas Maxagro en Chillán.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 617987,
+    "fecha": "27/08/26",
+    "cliente_asunto": "Pacific Hydro / Asesoría Compliance",
+    "duracion": "03:45",
+    "cobrable": true,
+    "descripcion": "Revisión y modificación de la Política de Conflictos de Interés elaborada por el cliente.",
+    "editable": false
+  },
+  {
+    "id_trabajo": 618011,
+    "fecha": "27/08/26",
+    "cliente_asunto": "Viñedos Familia Chadwick / Crédito Sindicado",
+    "duracion": "00:25",
+    "cobrable": true,
+    "descripcion": "Financiamiento Viñedos Familia Chadwick: reunión con abogado a cargo del financiamiento.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 618203,
+    "fecha": "28/08/26",
+    "cliente_asunto": "ICARE / Asesoría general",
+    "duracion": "00:05",
+    "cobrable": true,
+    "descripcion": "Revisión de antecedentes en el marco de la asesoría general a ICARE.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 618204,
+    "fecha": "28/08/26",
+    "cliente_asunto": "Southern Copper Corporation / Modelos de Prevención",
+    "duracion": "01:30",
+    "cobrable": true,
+    "descripcion": "Preparación de los informes de diagnóstico del Modelo de Prevención de Delitos de la compañía.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 618224,
+    "fecha": "28/08/26",
+    "cliente_asunto": "Viñedos Familia Chadwick / Crédito Sindicado",
+    "duracion": "02:20",
+    "cobrable": true,
+    "descripcion": "elaboración del informe de títulos de los inmuebles involucrados en la operación, revisando la cadena de dominio, gravámenes, prohibiciones e hipotecas vigentes, y verificando la concordancia de los antecedentes registrales con la documentación de la operación.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 618345,
+    "fecha": "28/08/26",
+    "cliente_asunto": "Leñadura S.A. / Sujetos Responsables Comapa",
+    "duracion": "00:10",
+    "cobrable": true,
+    "descripcion": "Revisión y aprobación de la contribución benéfica de Turismo Comapa a Fundación Las Rosas.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 620404,
+    "fecha": "28/08/26",
+    "cliente_asunto": "Viñedos Familia Chadwick / Crédito Sindicado",
+    "duracion": "02:00",
+    "cobrable": true,
+    "descripcion": "Financiamiento Viñedos Familia Chadwick: elaboración del informe de títulos de los inmuebles involucrados en la operación, revisando la cadena de dominio, gravámenes, prohibiciones e hipotecas vigentes, y verificando la concordancia de los antecedentes registrales con la documentación de la operación.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 618603,
+    "fecha": "31/08/26",
+    "cliente_asunto": "Southern Copper Corporation / Modelos de Prevención",
+    "duracion": "03:05",
+    "cobrable": true,
+    "descripcion": "Elaboración de Informe de diagnóstico del Modelo de Prevención de Delitos",
+    "editable": true
+  },
+  {
+    "id_trabajo": 618604,
+    "fecha": "31/08/26",
+    "cliente_asunto": "Grupo Pampa / Compliance",
+    "duracion": "00:15",
+    "cobrable": true,
+    "descripcion": "Coordinación del informe de brechas del sistema de compliance.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 618617,
+    "fecha": "31/08/26",
+    "cliente_asunto": "Construmart / Implementación MDP",
+    "duracion": "00:05",
+    "cobrable": true,
+    "descripcion": "Envío de la presentación PPT para la capacitación mensual en materia de compliance, en cumplimiento con el calendario de actividades 2026.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 618627,
+    "fecha": "31/08/26",
+    "cliente_asunto": "ICARE / Asesoría general",
+    "duracion": "00:05",
+    "cobrable": true,
+    "descripcion": "Llamado junto a Francisca Ward para la revisión de comentarios al contrato con PwC, auspiciador del Evento Joven ICARE 2026.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 618690,
+    "fecha": "31/08/26",
+    "cliente_asunto": "South Port / Asesoría General",
+    "duracion": "00:30",
+    "cobrable": true,
+    "descripcion": "Elaboración de la presentación Power Point para la reunión informativa de inicio del proceso de elaboración del Modelo de Prevención de Delitos de la Ley N° 20.393 de la compañía.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 618760,
+    "fecha": "31/08/26",
+    "cliente_asunto": "South Port / Asesoría General",
+    "duracion": "00:35",
+    "cobrable": true,
+    "descripcion": "Realización de reunión con la compañía sobre el Modelo de Prevención de Delitos.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 618768,
+    "fecha": "31/08/26",
+    "cliente_asunto": "Southern Copper Corporation / Modelos de Prevención",
+    "duracion": "02:50",
+    "cobrable": true,
+    "descripcion": "Informe de diagnóstico Souther Copper",
+    "editable": true
+  },
+  {
+    "id_trabajo": 619631,
+    "fecha": "31/08/26",
+    "cliente_asunto": "BSVV / Actividades Academicas",
+    "duracion": "00:45",
+    "cobrable": false,
+    "descripcion": "Planning equipo mercantil",
+    "editable": true
+  },
+  {
+    "id_trabajo": 619025,
+    "fecha": "01/09/26",
+    "cliente_asunto": "Southern Copper Corporation / Modelos de Prevención",
+    "duracion": "00:25",
+    "cobrable": true,
+    "descripcion": "Revisión y registro de los informes de diagnóstico elaborados y enviados al cliente. Asimismo, revisión de las próximas etapas del proceso, con el objeto de recordar a los equipos involucrados las tareas pendientes y solicitar los antecedentes necesarios.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 619026,
+    "fecha": "01/09/26",
+    "cliente_asunto": "Grupo Pampa / Compliance",
+    "duracion": "02:35",
+    "cobrable": true,
+    "descripcion": "Elaboración del informe de brechas en materia de compliance, identificando y describiendo las brechas detectadas en los procesos, políticas y controles internos del cliente frente a la normativa y estándares aplicables en la materia.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 619092,
+    "fecha": "01/09/26",
+    "cliente_asunto": "Viñedos Familia Chadwick / Crédito Sindicado",
+    "duracion": "04:35",
+    "cobrable": true,
+    "descripcion": "Continuación de la revisión de los antecedentes, títulos y documentación asociados a la operación de financiamiento.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 619171,
+    "fecha": "01/09/26",
+    "cliente_asunto": "HBC Latina / Pacto de Accionistas",
+    "duracion": "00:45",
+    "cobrable": true,
+    "descripcion": "Últimas modificaciones y actualizaciones a los Pactos de Accionistas de Glam Chile SpA y HBC Latina SpA. Asimismo, se envían los documentos a firma.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 619318,
+    "fecha": "02/09/26",
+    "cliente_asunto": "HBC Latina / Pacto de Accionistas",
+    "duracion": "00:05",
+    "cobrable": true,
+    "descripcion": "Modificación del firmante del Pacto de Accionistas de HBC Latina SpA. Asimismo, se envía nuevamente el documento a firma.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 619319,
+    "fecha": "02/09/26",
+    "cliente_asunto": "BSVV / Actividades Academicas",
+    "duracion": "00:45",
+    "cobrable": false,
+    "descripcion": "Elaboración de propuesta de honorarios para la elaboración del Modelo de Prevención de Delitos de South Port.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 619327,
+    "fecha": "02/09/26",
+    "cliente_asunto": "Viñedos Familia Chadwick / Crédito Sindicado",
+    "duracion": "02:35",
+    "cobrable": true,
+    "descripcion": "Elaboración del informe de títulos de los inmuebles involucrados en la operación, revisando la cadena de dominio, gravámenes, prohibiciones e hipotecas vigentes, y verificando la concordancia de los antecedentes registrales con la documentación de la operación.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 619543,
+    "fecha": "02/09/26",
+    "cliente_asunto": "Alupar / MPD",
+    "duracion": "00:15",
+    "cobrable": true,
+    "descripcion": "Revisión de las modificaciones realizadas por el cliente al procedimiento de investigación de denuncias. Asimismo, se envía correo al cliente con sugerencias sobre dicho procedimiento.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 619551,
+    "fecha": "02/09/26",
+    "cliente_asunto": "INGEVEC Inmobiliaria / Financiamientos",
+    "duracion": "00:10",
+    "cobrable": true,
+    "descripcion": "BTG- Revisión de antecedentes relativos a la operación con Banco BTG.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 619627,
+    "fecha": "02/09/26",
+    "cliente_asunto": "BSVV / Administración",
+    "duracion": "01:00",
+    "cobrable": false,
+    "descripcion": "Realización de entrevistas a postulantes del programa de pasantías 2027.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 619628,
+    "fecha": "02/09/26",
+    "cliente_asunto": "BSVV / Actividades Academicas",
+    "duracion": "01:00",
+    "cobrable": false,
+    "descripcion": "Exposición de la charla de formación \"Autorizaciones ambientales\".",
+    "editable": true
+  },
+  {
+    "id_trabajo": 620405,
+    "fecha": "02/09/26",
+    "cliente_asunto": "Viñedos Familia Chadwick / Crédito Sindicado",
+    "duracion": "03:00",
+    "cobrable": true,
+    "descripcion": "Elaboración del informe de títulos de los inmuebles involucrados en la operación, revisando la cadena de dominio, gravámenes, prohibiciones e hipotecas vigentes, y verificando la concordancia de los antecedentes registrales con la documentación de la operación.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 619630,
+    "fecha": "03/09/26",
+    "cliente_asunto": "BSVV / Actividades Academicas",
+    "duracion": "01:00",
+    "cobrable": false,
+    "descripcion": "Asistencia a la charla \"Conociendo Garrigues\".",
+    "editable": true
+  },
+  {
+    "id_trabajo": 619639,
+    "fecha": "03/09/26",
+    "cliente_asunto": "Grupo Pampa / Compliance",
+    "duracion": "07:20",
+    "cobrable": true,
+    "descripcion": "Elaboración del informe de brechas del sistema de compliance de Grupo Pampa, revisando los antecedentes y hallazgos sistematizados a la fecha y profundizando la descripción de las brechas detectadas en los procesos, políticas y controles internos del cliente frente a lo exigido por las Leyes N° 20.393 y N° 21.595.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 619685,
+    "fecha": "03/09/26",
+    "cliente_asunto": "Southern Copper Corporation / Modelos de Prevención",
+    "duracion": "00:20",
+    "cobrable": true,
+    "descripcion": "Coordinación de la reunión de revisión y comentarios al informe de diagnóstico elaborado.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 619774,
+    "fecha": "03/09/26",
+    "cliente_asunto": "Viñedos Familia Chadwick / Crédito Sindicado",
+    "duracion": "00:25",
+    "cobrable": true,
+    "descripcion": "Revisión del informe de títulos de los inmuebles involucrados en la due diligence de la operación.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 619894,
+    "fecha": "04/09/26",
+    "cliente_asunto": "Grupo Pampa / Compliance",
+    "duracion": "02:55",
+    "cobrable": true,
+    "descripcion": "Elaboración del informe de brechas del sistema de compliance, revisando los antecedentes recopilados y sistematizando los hallazgos detectados para su incorporación al documento.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 619939,
+    "fecha": "04/09/26",
+    "cliente_asunto": "Viñedos Familia Chadwick / Crédito Sindicado",
+    "duracion": "00:30",
+    "cobrable": true,
+    "descripcion": "Reunión relativa al aval contemplado en la operación.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 619940,
+    "fecha": "04/09/26",
+    "cliente_asunto": "Grupo Pampa / Compliance",
+    "duracion": "00:30",
+    "cobrable": true,
+    "descripcion": "Reunión junto a Sebastián Barros de revisión del informe de brechas del sistema de compliance.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 619941,
+    "fecha": "04/09/26",
+    "cliente_asunto": "Southern Copper Corporation / Modelos de Prevención",
+    "duracion": "00:30",
+    "cobrable": true,
+    "descripcion": "Reunión junto a Sebastián Barros de preparación de la reunión con el equipo de Southern Copper.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 620035,
+    "fecha": "04/09/26",
+    "cliente_asunto": "Viñedos Familia Chadwick / Crédito Sindicado",
+    "duracion": "01:50",
+    "cobrable": true,
+    "descripcion": "Continuación de la elaboración del informe de títulos de los inmuebles involucrados en la due diligence inmobiliaria, revisando la cadena de dominio, gravámenes, prohibiciones e hipotecas vigentes, y verificando la concordancia de los antecedentes registrales con la documentación de la operación.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 620044,
+    "fecha": "04/09/26",
+    "cliente_asunto": "Southern Copper Corporation / Modelos de Prevención",
+    "duracion": "01:30",
+    "cobrable": true,
+    "descripcion": "Reunión de revisión del informe de diagnóstico y coordinación de los avances en el proceso de actualización del Modelo de Prevención de Delitos.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 620233,
+    "fecha": "07/09/26",
+    "cliente_asunto": "Lemuy Group / Asesoría general",
+    "duracion": "01:40",
+    "cobrable": true,
+    "descripcion": "Elaboración JEA que apruba Estados Financieros",
+    "editable": true
+  },
+  {
+    "id_trabajo": 620234,
+    "fecha": "07/09/26",
+    "cliente_asunto": "Viñedos Familia Chadwick / Crédito Sindicado",
+    "duracion": "05:45",
+    "cobrable": true,
+    "descripcion": "Continuación de la elaboración del informe de títulos de los inmuebles involucrados en el financiamiento de Viñedos Familia Chadwick, revisando la cadena de dominio, gravámenes, prohibiciones e hipotecas vigentes, y verificando la concordancia de los antecedentes registrales con la documentación de la operación.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 620416,
+    "fecha": "07/09/26",
+    "cliente_asunto": "Grupo Pampa / Compliance",
+    "duracion": "01:15",
+    "cobrable": true,
+    "descripcion": "Elaboración del informe de brechas del modelo de prevención de delitos de Grupo Pampa, conforme a las Leyes N° 20.393 y N° 21.595.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 620566,
+    "fecha": "08/09/26",
+    "cliente_asunto": "Grupo Pampa / Compliance",
+    "duracion": "05:20",
+    "cobrable": true,
+    "descripcion": "Elaboración del informe de brechas del sistema de compliance de Grupo Pampa, revisando los antecedentes y hallazgos sistematizados a la fecha y profundizando la descripción de las brechas detectadas en los procesos, políticas y controles internos del cliente frente a lo exigido por las Leyes N° 20.393 y N° 21.595.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 620608,
+    "fecha": "08/09/26",
+    "cliente_asunto": "Alupar / MPD",
+    "duracion": "00:05",
+    "cobrable": true,
+    "descripcion": "Envío de la versión final del Procedimiento de Investigación de Denuncias.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 620609,
+    "fecha": "08/09/26",
+    "cliente_asunto": "Southern Copper Corporation / Modelos de Prevención",
+    "duracion": "00:05",
+    "cobrable": true,
+    "descripcion": "Envío de correo con el listado chileno de personas expuestas políticamente.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 620610,
+    "fecha": "08/09/26",
+    "cliente_asunto": "Viñedos Familia Chadwick / Crédito Sindicado",
+    "duracion": "01:45",
+    "cobrable": true,
+    "descripcion": "Revisión en el data room de los certificados de gravámenes de derechos de agua solicitados con vigencia, comunicando a la contraparte la falta de actualización de un determinado certificado. Asimismo, se realiza la última revisión y modificación del informe de títulos.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 620666,
+    "fecha": "08/09/26",
+    "cliente_asunto": "Viñedos Familia Chadwick / Crédito Sindicado",
+    "duracion": "00:50",
+    "cobrable": true,
+    "descripcion": "Reunión junto al equipo de Banco Santander para la revisión de las modificaciones elaboradas por VFCH al contrato de financiamiento.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 620694,
+    "fecha": "08/09/26",
+    "cliente_asunto": "INGEVEC Inmobiliaria / Financiamientos",
+    "duracion": "00:35",
+    "cobrable": true,
+    "descripcion": "Falcon: revisión de los antecedentes correspondientes a la operación.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 620704,
+    "fecha": "08/09/26",
+    "cliente_asunto": "INGEVEC Inmobiliaria / Financiamientos",
+    "duracion": "00:25",
+    "cobrable": true,
+    "descripcion": "BTG: revisión y respuesta a correo de Banco BTG con dudas sobre endosos en dominio, garantía y pagarés específicos de la operación.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 620860,
+    "fecha": "09/09/26",
+    "cliente_asunto": "Grupo Pampa / Compliance",
+    "duracion": "00:15",
+    "cobrable": true,
+    "descripcion": "Elaboración del informe de brechas del sistema de compliance de Grupo Pampa, revisando los antecedentes y hallazgos sistematizados a la fecha y profundizando la descripción de las brechas detectadas en los procesos, políticas y controles internos del cliente frente a lo exigido por las Leyes N° 20.393 y N° 21.595.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 621221,
+    "fecha": "09/09/26",
+    "cliente_asunto": "Empresas Maxagro / Actualización MPD",
+    "duracion": "00:35",
+    "cobrable": true,
+    "descripcion": "Preparación de la capacitación del Modelo de Prevención de Delitos a realizar en la faenadora Las Pataguas de Pichidegua.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 621222,
+    "fecha": "09/09/26",
+    "cliente_asunto": "Empresas Maxagro / Actualización MPD",
+    "duracion": "06:30",
+    "cobrable": true,
+    "descripcion": "Traslado a la faenadora Las Pataguas de Pichidegua y realización de la capacitación presencial del Modelo de Prevención de Delitos a las jefaturas de dicha faenadora de Empresas Maxagro.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 621223,
+    "fecha": "10/09/26",
+    "cliente_asunto": "INGEVEC Inmobiliaria / Financiamientos",
+    "duracion": "00:55",
+    "cobrable": true,
+    "descripcion": "Coquimbo Capital SpA - Revisión y actualización del acta de sesión de directorio para la modificación de la estructura de poderes de la sociedad, en el marco de la operación de financiamiento entre MBI e Ingevec para el proyecto One La Serena.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 621245,
+    "fecha": "10/09/26",
+    "cliente_asunto": "INGEVEC Inmobiliaria / Financiamientos",
+    "duracion": "03:30",
+    "cobrable": true,
+    "descripcion": "Falcon - Revisión y preparación de la documentación correspondiente a la operación de financiamiento Falcon de Ingevec, con el objeto de avanzar en su tramitación.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 621290,
+    "fecha": "10/09/26",
+    "cliente_asunto": "INGEVEC Inmobiliaria / Financiamientos",
+    "duracion": "01:05",
+    "cobrable": true,
+    "descripcion": "BTG - Envío de respuesta a Benjamín Riedel a sus consultas respecto de los prepagos correspondientes a marzo y junio de 2026, remitiéndole asimismo el listado de pendientes.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 621293,
+    "fecha": "10/09/26",
+    "cliente_asunto": "Grupo Pampa / Compliance",
+    "duracion": "02:05",
+    "cobrable": true,
+    "descripcion": "Elaboración del informe de brechas del sistema de compliance de Grupo Pampa, revisando los antecedentes y hallazgos sistematizados a la fecha y profundizando la descripción de las brechas detectadas en los procesos, políticas y controles internos del cliente frente a lo exigido por las Leyes N° 20.393 y N° 21.595.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 621507,
+    "fecha": "11/09/26",
+    "cliente_asunto": "INGEVEC Inmobiliaria / Financiamientos",
+    "duracion": "00:55",
+    "cobrable": true,
+    "descripcion": "Coordinación con Falcom en el marco de la operación de financiamiento entre MBI e Ingevec.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 621517,
+    "fecha": "11/09/26",
+    "cliente_asunto": "INGEVEC Inmobiliaria / Financiamientos",
+    "duracion": "01:35",
+    "cobrable": true,
+    "descripcion": "Modificación del firmante de los endosos en garantía otorgados a favor de Banco BTG. Asimismo, revisión del alzamiento de prendas remitido por dicho banco.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 621533,
+    "fecha": "11/09/26",
+    "cliente_asunto": "ICARE / Asesoría general",
+    "duracion": "00:15",
+    "cobrable": true,
+    "descripcion": "Explicación a Francisca Ward sobre la necesidad de incluir el rut de los representantes legales de Clínica Alemana en el contrato respectivo.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 621597,
+    "fecha": "11/09/26",
+    "cliente_asunto": "Grupo Pampa / Compliance",
+    "duracion": "02:45",
+    "cobrable": true,
+    "descripcion": "Elaboración del informe de brechas, revisando los antecedentes y la información necesaria para su desarrollo.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 621698,
+    "fecha": "11/09/26",
+    "cliente_asunto": "BSVV / Actividades Academicas",
+    "duracion": "00:25",
+    "cobrable": false,
+    "descripcion": "Actualización del informe de títulos.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 621777,
+    "fecha": "11/09/26",
+    "cliente_asunto": "STEA / Asesoría General",
+    "duracion": "00:25",
+    "cobrable": true,
+    "descripcion": "preparación de poder especial para constituir fianza y retirar",
+    "editable": false
+  },
+  {
+    "id_trabajo": 621778,
+    "fecha": "11/09/26",
+    "cliente_asunto": "Grupo Pampa / Compliance",
+    "duracion": "00:10",
+    "cobrable": true,
+    "descripcion": "Elaboración del informe de brechas del sistema de compliance de Grupo Pampa, revisando los antecedentes y hallazgos sistematizados a la fecha y profundizando la descripción de las brechas detectadas en los procesos, políticas y controles internos del cliente frente a lo exigido por las Leyes N° 20.393 y N° 21.595.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 621816,
+    "fecha": "14/09/26",
+    "cliente_asunto": "STEA / Asesoría General",
+    "duracion": "01:00",
+    "cobrable": true,
+    "descripcion": "Elaboración de poder especial para constituir fianza y retirar.",
+    "editable": false
+  },
+  {
+    "id_trabajo": 621827,
+    "fecha": "14/09/26",
+    "cliente_asunto": "INGEVEC Inmobiliaria / Financiamientos",
+    "duracion": "00:15",
+    "cobrable": true,
+    "descripcion": "MBI/Los Ángeles- revisión de documentos de quinta prórroga con MBI para informar a Nicolás Santa Cruz que hoy correspondería ralziar la sexta prórroga dle financiamiento.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 621896,
+    "fecha": "14/09/26",
+    "cliente_asunto": "Viñedos Familia Chadwick / Crédito Sindicado",
+    "duracion": "04:40",
+    "cobrable": true,
+    "descripcion": "Revisión de documentos.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 621927,
+    "fecha": "14/09/26",
+    "cliente_asunto": "STEA / Asesoría General",
+    "duracion": "00:15",
+    "cobrable": true,
+    "descripcion": "Firma de poder especial para constituir fianza y retirar.",
+    "editable": false
+  },
+  {
+    "id_trabajo": 621928,
+    "fecha": "14/09/26",
+    "cliente_asunto": "Viñedos Familia Chadwick / Crédito Sindicado",
+    "duracion": "00:35",
+    "cobrable": true,
+    "descripcion": "Reunión de coordinación.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 622106,
+    "fecha": "14/09/26",
+    "cliente_asunto": "INGEVEC Inmobiliaria / Financiamientos",
+    "duracion": "00:10",
+    "cobrable": true,
+    "descripcion": "BTG - Coordinación de la entrega de documentos entre Ingevec y BTG.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 622238,
+    "fecha": "15/09/26",
+    "cliente_asunto": "Viñedos Familia Chadwick / Crédito Sindicado",
+    "duracion": "00:35",
+    "cobrable": true,
+    "descripcion": "Revisión y modificación final del informe de títulos de los inmuebles involucrados en el financiamiento de Viñedos Familia Chadwick.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 622279,
+    "fecha": "15/09/26",
+    "cliente_asunto": "Viñedos Familia Chadwick / Crédito Sindicado",
+    "duracion": "01:15",
+    "cobrable": true,
+    "descripcion": "Revisión de Hipoteca y de Alzamiento de Hipoteca de Bice.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 622300,
+    "fecha": "15/09/26",
+    "cliente_asunto": "Viñedos Familia Chadwick / Crédito Sindicado",
+    "duracion": "01:10",
+    "cobrable": true,
+    "descripcion": "Revisión final de los documentos de la operación y moidificación respecto a individualziación de derechos de aprovechamiento de aguas.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 622301,
+    "fecha": "15/09/26",
+    "cliente_asunto": "STEA / Asesoría General",
+    "duracion": "00:10",
+    "cobrable": true,
+    "descripcion": "Gestiiones notariales para autorización de poder especial de Deivis Gáete",
+    "editable": false
+  },
+  {
+    "id_trabajo": 622314,
+    "fecha": "15/09/26",
+    "cliente_asunto": "Southern Copper Corporation / Modelos de Prevención",
+    "duracion": "00:20",
+    "cobrable": true,
+    "descripcion": "Modificaciones finales al Informe de Diagnóstico del Modelo de Prevención de Delitos y envío de la versión final al cliente.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 622322,
+    "fecha": "15/09/26",
+    "cliente_asunto": "INGEVEC Inmobiliaria / Financiamientos",
+    "duracion": "00:20",
+    "cobrable": true,
+    "descripcion": "MBI/Los Ángeles - Elaboración de los documentos correspondientes a la sexta prórroga del financiamiento entre MBI e Ingevec.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 622339,
+    "fecha": "15/09/26",
+    "cliente_asunto": "Alupar / MPD",
+    "duracion": "00:10",
+    "cobrable": true,
+    "descripcion": "Reunión de coordinación del proceso de elaboración e implementación del Modelo de Prevención de Delitos.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 622346,
+    "fecha": "15/09/26",
+    "cliente_asunto": "Leñadura S.A. / Sujetos Responsables Navimag",
+    "duracion": "00:10",
+    "cobrable": true,
+    "descripcion": "Revisión de la consulta de Rafael Sepúlveda relativa a la contratación de un asesor externo.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 622351,
+    "fecha": "15/09/26",
+    "cliente_asunto": "Grupo Pampa / Compliance",
+    "duracion": "02:30",
+    "cobrable": true,
+    "descripcion": "Elaboración del informe de brechas del sistema de compliance de Grupo Pampa, revisando los antecedentes y hallazgos sistematizados a la fecha y profundizando la descripción de las brechas detectadas en los procesos, políticas y controles internos del cliente frente a lo exigido por las Leyes N° 20.393 y N° 21.595.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 622439,
+    "fecha": "15/09/26",
+    "cliente_asunto": "Empresas Ecasa / Fiscalización UAF",
+    "duracion": "00:15",
+    "cobrable": true,
+    "descripcion": "Revisión de los oficios recibidos y de la solicitud presentada a raíz de la fiscalización efectuada por la Unidad de Análisis Financiero (UAF).",
+    "editable": true
+  },
+  {
+    "id_trabajo": 622441,
+    "fecha": "15/09/26",
+    "cliente_asunto": "ICARE / Asesoría general",
+    "duracion": "00:10",
+    "cobrable": true,
+    "descripcion": "Revisión de la nueva versión del contrato de auspicio a suscribirse entre ICARE y Empresas Copec como auspiciador del Evento Joven ICARE 2026, y envío del documento revisado al cliente.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 622442,
+    "fecha": "15/09/26",
+    "cliente_asunto": "ICARE / Asesoría general",
+    "duracion": "00:10",
+    "cobrable": true,
+    "descripcion": "Revisión de la versión final del contrato de socio colaborador a suscribirse entre ICARE y PwC, y envío del documento al cliente.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 622521,
+    "fecha": "16/09/26",
+    "cliente_asunto": "INGEVEC Inmobiliaria / Financiamientos",
+    "duracion": "00:50",
+    "cobrable": true,
+    "descripcion": "BTG - Revisión de la planilla excel que mantiene el registro de los pagarés que deben ser devueltos a Banco BTG, considerando los prepagos efectuados en marzo y junio de 2026.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 622537,
+    "fecha": "16/09/26",
+    "cliente_asunto": "Empresas Ecasa / Fiscalización UAF",
+    "duracion": "01:00",
+    "cobrable": true,
+    "descripcion": "Elaboración del plan de acción para dar respuesta a la fiscalización efectuada por la Unidad de Análisis Financiero (UAF).",
+    "editable": true
+  },
+  {
+    "id_trabajo": 622583,
+    "fecha": "16/09/26",
+    "cliente_asunto": "INGEVEC Inmobiliaria / Financiamientos",
+    "duracion": "00:30",
+    "cobrable": true,
+    "descripcion": "MBI - Finalización de la elaboración de los documentos necesarios para la sexta prórroga de la operación de financiamiento del proyecto Los Ángeles. Se envían los borradores de dichos documentos para su revisión, confirmación y posterior firma.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 622593,
+    "fecha": "16/09/26",
+    "cliente_asunto": "Grupo Pampa / Compliance",
+    "duracion": "00:50",
+    "cobrable": true,
+    "descripcion": "Elaboración del informe de brechas del sistema de compliance de Grupo Pampa, revisando los antecedentes y hallazgos sistematizados a la fecha y profundizando la descripción de las brechas detectadas en los procesos, políticas y controles internos del cliente frente a lo exigido por las Leyes N° 20.393 y N° 21.595.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 622659,
+    "fecha": "16/09/26",
+    "cliente_asunto": "INGEVEC Inmobiliaria / Financiamientos",
+    "duracion": "02:00",
+    "cobrable": true,
+    "descripcion": "BTG - Continuación de la revisión de las planillas excel enviadas por Banco BTG relativas a los prepagos de marzo y junio de 2026, verificando qué pagarés han sido pagados, abonados, deben devolverse o se encuentran cedidos en garantía, y revisando la documentación correspondiente a las respectivas operaciones.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 622788,
+    "fecha": "17/09/26",
+    "cliente_asunto": "INGEVEC Inmobiliaria / Financiamientos",
+    "duracion": "00:25",
+    "cobrable": true,
+    "descripcion": "BTG- revisión y envío de alzamientos de prenda sin desplazamiento pendientes por parte de banco BTG",
+    "editable": true
+  },
+  {
+    "id_trabajo": 622789,
+    "fecha": "17/09/26",
+    "cliente_asunto": "Grupo Pampa / Compliance",
+    "duracion": "02:30",
+    "cobrable": true,
+    "descripcion": "Elaboración del informe de brechas del sistema de compliance de Grupo Pampa, revisando los antecedentes y hallazgos sistematizados a la fecha y profundizando la descripción de las brechas detectadas en los procesos, políticas y controles internos del cliente frente a lo exigido por las Leyes N° 20.393 y N° 21.595.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 622793,
+    "fecha": "17/09/26",
+    "cliente_asunto": "INGEVEC Inmobiliaria / Financiamientos",
+    "duracion": "00:05",
+    "cobrable": true,
+    "descripcion": "MBI/Coquimbo Capital- Se reenvía sesión de directorio de coquimbo capital para firma de José Antonio Bustamante. Asimismo, se envía correo de seguimiento para gestionarla.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 622826,
+    "fecha": "17/09/26",
+    "cliente_asunto": "INGEVEC Inmobiliaria / Financiamientos",
+    "duracion": "00:15",
+    "cobrable": true,
+    "descripcion": "MBI/Los Ángeles-Modificación y envío de los documentos correspondientes a la sexta prórroga de la operación.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 623913,
+    "fecha": "17/09/26",
+    "cliente_asunto": "Grupo Pampa / Compliance",
+    "duracion": "02:30",
+    "cobrable": true,
+    "descripcion": "Elaboración del informe de brechas del sistema de compliance de Grupo Pampa, revisando los antecedentes y hallazgos sistematizados a la fecha y profundizando la descripción de las brechas detectadas en los procesos, políticas y controles internos del cliente frente a lo exigido por las Leyes N° 20.393 y N° 21.595.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 623010,
+    "fecha": "21/09/26",
+    "cliente_asunto": "Leñadura S.A. / Sujetos Responsables Navimag",
+    "duracion": "00:10",
+    "cobrable": true,
+    "descripcion": "Recepción de denuncia interna y respuesta de la misma, disponiéndose la apertura de un procedimiento de investigación por existir mérito suficiente para proceder.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 623011,
+    "fecha": "21/09/26",
+    "cliente_asunto": "Grupo Pampa / Compliance",
+    "duracion": "02:15",
+    "cobrable": true,
+    "descripcion": "Elaboración del informe de brechas del sistema de compliance de Grupo Pampa, revisando los antecedentes y hallazgos sistematizados a la fecha y profundizando la descripción de las brechas detectadas en los procesos, políticas y controles internos del cliente frente a lo exigido por las Leyes N° 20.393 y N° 21.595.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 623914,
+    "fecha": "21/09/26",
+    "cliente_asunto": "Grupo Pampa / Compliance",
+    "duracion": "02:00",
+    "cobrable": true,
+    "descripcion": "Elaboración del informe de brechas del sistema de compliance de Grupo Pampa, revisando los antecedentes y hallazgos sistematizados a la fecha y profundizando la descripción de las brechas detectadas en los procesos, políticas y controles internos del cliente frente a lo exigido por las Leyes N° 20.393 y N° 21.595.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 623915,
+    "fecha": "21/09/26",
+    "cliente_asunto": "Grupo Pampa / Compliance",
+    "duracion": "01:20",
+    "cobrable": true,
+    "descripcion": "Elaboración del informe de brechas del sistema de compliance de Grupo Pampa, revisando los antecedentes y hallazgos sistematizados a la fecha y profundizando la descripción de las brechas detectadas en los procesos, políticas y controles internos del cliente frente a lo exigido por las Leyes N° 20.393 y N° 21.595.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 623916,
+    "fecha": "21/09/26",
+    "cliente_asunto": "Grupo Pampa / Compliance",
+    "duracion": "01:35",
+    "cobrable": true,
+    "descripcion": "Elaboración del informe de brechas del sistema de compliance de Grupo Pampa, revisando los antecedentes y hallazgos sistematizados a la fecha y profundizando la descripción de las brechas detectadas en los procesos, políticas y controles internos del cliente frente a lo exigido por las Leyes N° 20.393 y N° 21.595.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 623309,
+    "fecha": "22/09/26",
+    "cliente_asunto": "Grupo Pampa / Compliance",
+    "duracion": "03:35",
+    "cobrable": true,
+    "descripcion": "Elaboración del informe de brechas, con revisión de la normativa aplicable y sistematización de las brechas detectadas para su incorporación al documento.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 623404,
+    "fecha": "22/09/26",
+    "cliente_asunto": "Grupo Pampa / Compliance",
+    "duracion": "02:05",
+    "cobrable": true,
+    "descripcion": "Elaboración del informe de brechas, con revisión de los antecedentes y redacción del documento respectivo.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 623516,
+    "fecha": "22/09/26",
+    "cliente_asunto": "Grupo Pampa / Compliance",
+    "duracion": "01:20",
+    "cobrable": true,
+    "descripcion": "Elaboración del informe de brechas y envío del borrador correspondiente.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 623518,
+    "fecha": "22/09/26",
+    "cliente_asunto": "Leñadura S.A. / Sujetos Responsables Navimag",
+    "duracion": "00:10",
+    "cobrable": true,
+    "descripcion": "Respuesta a Rafael Sepúlveda tras la revisión de la propuesta del asesor externo, con análisis de la inclusión de obligaciones de cumplimiento en la relación contractual con dicho asesor.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 623546,
+    "fecha": "23/09/26",
+    "cliente_asunto": "Grupo Pampa / Compliance",
+    "duracion": "02:10",
+    "cobrable": true,
+    "descripcion": "Elaboración y revisión del informe de brechas, incorporando los ajustes a su contenido y verificando su consistencia con los antecedentes normativos aplicables.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 623630,
+    "fecha": "23/09/26",
+    "cliente_asunto": "INGEVEC Inmobiliaria / Financiamientos",
+    "duracion": "00:05",
+    "cobrable": true,
+    "descripcion": "BTG- Revisión y registro de la escritura pública de prenda sin desplazamiento sobre créditos remitida por el Banco BTG.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 623638,
+    "fecha": "23/09/26",
+    "cliente_asunto": "INGEVEC Inmobiliaria / Financiamientos",
+    "duracion": "00:25",
+    "cobrable": true,
+    "descripcion": "BTG- Tras envío de pagarés prepagados en el mes de marzo y junio de 2026, se envía listado de hojas de prolongación pendientes, las cuales según nuestros registros fueron enviadas a Ingevec. Se responde correo a Ingevec informando la remisión de dichos antecedentes y se adjunta copia de dichas hojas para facilitar una nueva revisión.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 623652,
+    "fecha": "23/09/26",
+    "cliente_asunto": "Food Group / Asesoría general",
+    "duracion": "01:45",
+    "cobrable": true,
+    "descripcion": "Revisión de la documentación societaria y de los poderes vinculados a la operación en Perú, verificando su vigencia y su suficiencia para los efectos de la asesoría en curso a Food Group.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 623662,
+    "fecha": "23/09/26",
+    "cliente_asunto": "Food Group / Asesoría general",
+    "duracion": "01:20",
+    "cobrable": true,
+    "descripcion": "Elaboración del contrato de compraventa de acciones entre Food Group y Boston Manufacturing SpA, incorporando las declaraciones y garantías y demás cláusulas conforme a los hallazgos del proceso de Due Diligence.",
+    "editable": true
+  },
+  {
+    "id_trabajo": 623704,
+    "fecha": "23/09/26",
+    "cliente_asunto": "Grupo Pampa / Compliance",
+    "duracion": "02:20",
+    "cobrable": true,
+    "descripcion": "Revisión junto a Sebastián Barros de Informe de brechas",
+    "editable": true
+  },
+  {
+    "id_trabajo": 623825,
+    "fecha": "24/09/26",
+    "cliente_asunto": "Food Group / Asesoría general",
+    "duracion": "00:10",
+    "cobrable": true,
+    "descripcion": "Modificación",
+    "editable": true
+  },
+  {
+    "id_trabajo": 623830,
+    "fecha": "24/09/26",
+    "cliente_asunto": "INGEVEC Inmobiliaria / Financiamientos",
+    "duracion": "00:05",
+    "cobrable": true,
+    "descripcion": "Coquimbo Capital- recordatorio y seguimiento a la firma de José Antonio Bustamente a la sesión de directorio que acuerda la nueva estructura de poderes de Coquimbo Capital SpA",
+    "editable": true
+  },
+  {
+    "id_trabajo": 623837,
+    "fecha": "24/09/26",
+    "cliente_asunto": "Leñadura S.A. / Sujetos Responsables Navimag",
+    "duracion": "00:25",
+    "cobrable": true,
+    "descripcion": "Cláusula",
+    "editable": true
+  },
+  {
+    "id_trabajo": 623851,
+    "fecha": "24/09/26",
+    "cliente_asunto": "Empresas Ecasa / Fiscalización UAF",
+    "duracion": "01:45",
+    "cobrable": true,
+    "descripcion": "Revisión de solicitud de la UAF, asimismo se revisa y reenvía plan de acción elaborado, para dar cumplimiento al primer paso de la fiscalización",
+    "editable": true
+  },
+  {
+    "id_trabajo": 623885,
+    "fecha": "24/09/26",
+    "cliente_asunto": "Southern Copper Corporation / Modelos de Prevención",
+    "duracion": "00:05",
+    "cobrable": true,
+    "descripcion": "Preparación entrevistas a miembros de la compañía en Chile, para la actualziación del MPD",
+    "editable": true
+  }
+]

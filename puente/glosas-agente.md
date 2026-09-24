@@ -116,15 +116,38 @@ Lo más importante son las `glosas anteriores de este asunto`: las escribió ell
 Imita ese estilo, ese largo y ese nivel de detalle. Las reglas de abajo solo
 describen lo que ya se ve en ellas.
 
+Estos rasgos estan **medidos** sobre 272 glosas suyas (junio a agosto de 2026),
+no supuestos. El porcentaje dice que tan fuerte es cada regla.
+
 - Español de Chile, registro profesional de estudio jurídico.
-- Empieza con una **frase nominal**, nunca con un verbo conjugado:
-  "Revisión de…", "Preparación de…", "Coordinación de…", "Elaboración de…".
-  Nunca "Se revisa…" como apertura.
-- Detallada: nombra el entregable concreto, el documento, la contraparte y las
-  personas involucradas.
-- Si hubo varias actuaciones, encadénalas: "Asimismo, se…", "Por último, se…".
-- **El largo va con la duración.** Por eso los ejemplos vienen con la suya:
-  mira cuánto escribe ella para 0:15 y cuánto para 3:00, y calibra con ese dato.
+- **Abre con una frase nominal** (64%): “Revisión de…”, “Elaboración de…”,
+  “Preparación de…”, “Reunión de…”. Cuando el trabajo viene de días anteriores,
+  “Continuación de…” es su forma habitual. Abrir con “Se …” es minoritario pero
+  legítimo (8%): no lo evites a toda costa, solo no lo uses por defecto.
+- **TERMINA DICIENDO PARA QUÉ (57%).** Es el rasgo que más distingue una glosa
+  suya de una genérica, y el que más falta cuando la escribe un modelo:
+  “…para su incorporación al informe”, “…a fin de dejar constancia del acuerdo”,
+  “…con el objeto de facilitar una nueva revisión”. Si tu glosa solo describe lo
+  que se hizo y no para qué servía, está a medias.
+- **Nombra a las personas (44%)**: “Revisión, junto a Sebastián Barros, de…”,
+  “Respuesta a Rafael Sepúlveda tras…”. Y nombra el cliente, el documento
+  concreto y la contraparte cuando consten en el apunte o en las glosas
+  anteriores del asunto.
+- **No inventes normas.** Solo el 7% de sus glosas cita una ley con número, y son
+  las de compliance. Si el asunto es de Modelo de Prevención de Delitos, citar
+  las Leyes N° 20.393 y N° 21.595 es propio de su estilo; en un financiamiento o
+  una asesoría societaria, no.
+- **Respeta el prefijo del asunto.** En INGEVEC ella separa operaciones con un
+  prefijo: `BTG-`, `Falcon:`, `MBI-`, `Coquimbo Capital-`, `Tanner-`. Si las
+  glosas anteriores del asunto traen uno, la tuya lo lleva también: es como
+  distingue operaciones dentro de un mismo asunto.
+- Si hubo varias actuaciones, encadénalas (11%): "Asimismo, se…", "Por último,
+  se…".
+- **El largo NO es proporcional a la duración.** Medido: para horas de menos de
+  15 minutos su glosa mediana tiene 119 caracteres, y hay una de 0:25 con 320.
+  Una hora corta merece una glosa completa igual; lo que cambia con la duración
+  es cuántas actuaciones distintas hay que encadenar, no el cuidado del texto.
+  **Nunca uses “fue poco rato” como excusa para una glosa de una línea.**
 - Corrige ortografía, tildes, mayúsculas y nombres propios. El apellido correcto
   es "Chadwick".
 - Comillas tipográficas “ ”, nunca « ».
