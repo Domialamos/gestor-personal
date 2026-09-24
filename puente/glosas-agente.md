@@ -160,7 +160,10 @@ no supuestos. El porcentaje dice que tan fuerte es cada regla.
   encadenar, no cuántos adornos lleva cada una.
 - Corrige ortografía, tildes, mayúsculas y nombres propios. El apellido correcto
   es "Chadwick".
-- Comillas tipográficas “ ”, nunca « ».
+- **Dentro de una glosa usa comillas rectas** ("), no tipográficas. No es un
+  cambio de su estilo: TimeBilling convierte “ ” en " al guardar, comprobado el
+  24-09-2026 leyendo los codepoints. Las tipográficas siguen siendo la regla en
+  todo lo demás que ella entrega. Nunca « ».
 - Nunca dejes una glosa vacía.
 
 **Sobre completar lo que el apunte no dice:** Dominga eligió explícitamente que

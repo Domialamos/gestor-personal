@@ -59,7 +59,18 @@ export const exigirFecha = (fecha, donde) => {
 //
 // Mayusculas y tildes NO se tocan a proposito: "revision" no es "revisión", y
 // esa diferencia tiene que seguir contando como diferencia.
-export const normalizar = (t) => String(t ?? "").replace(/\s+/g, " ").trim();
+// TimeBilling normaliza las comillas al guardar: se le envia la tipografica
+// (U+201C/U+201D) y devuelve la recta (U+0022). Comprobado el 24-09-2026 leyendo
+// los codepoints de una glosa recien escrita. Sin igualarlas aca, toda glosa con
+// comillas volveria distinta de lo enviado, escribir la daria por NO confirmada
+// —un aviso falso en el unico canal— y la rutina la reescribiria cada noche sin
+// parar. Misma clase de desajuste que el colapso de los saltos de linea.
+export const normalizar = (t) =>
+  String(t ?? "")
+    .replace(/[“”]/g, '"')
+    .replace(/[‘’]/g, "'")
+    .replace(/\s+/g, " ")
+    .trim();
 export const igual = (a, b) => normalizar(a) === normalizar(b);
 
 // Guardas que tenia el flujo viejo (glosas-escribir.mjs:33-34) y se perdieron en

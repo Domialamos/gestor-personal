@@ -53,3 +53,21 @@ test("comparar con null o undefined no revienta", () => {
   assert.equal(igual(undefined, ""), true);
   assert.equal(igual(null, "algo"), false);
 });
+
+// TimeBilling normaliza las comillas al guardar: recibe la tipografica y devuelve
+// la recta. Comprobado el 24-09-2026 con #619628: se envio la charla entre “ ”
+// y volvio entre ". Sin igualarlas, escribir daria NO confirmada para siempre y la
+// rutina reescribiria esa hora cada noche.
+test("una comilla tipografica es igual a la recta que devuelve TimeBilling", () => {
+  assert.ok(igual(
+    'Exposicion de la charla “Autorizaciones ambientales”.',
+    'Exposicion de la charla "Autorizaciones ambientales".',
+  ));
+  assert.ok(igual('el ‘modelo’ vigente', "el 'modelo' vigente"));
+});
+
+test("igualar las comillas no borra diferencias de contenido", () => {
+  assert.ok(!igual('Charla “A”.', 'Charla "B".'));
+  assert.ok(!igual('Revision', 'revision'), 'las mayusculas siguen contando');
+  assert.ok(!igual('accion', 'acción'), 'las tildes siguen contando');
+});
