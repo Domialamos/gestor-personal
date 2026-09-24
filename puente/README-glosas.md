@@ -61,8 +61,29 @@ antiguas sin registrar.
 - si no es la glosa ni el apunte, fue alguien mas (lo mas probable, Dominga a
   mano): no se toca y sale en `divergencias`.
 
-Lo de fondo sigue en pie: **conviene correr la rutina con TimeBillingX cerrado.**
-Esto solo repara la deriva, no la evita.
+Esto **repara** la deriva; no la evita. Sobre si conviene cerrar TimeBillingX,
+ver la seccion siguiente: la respuesta corta es que no como regla horaria.
+
+### Cerrar TimeBillingX NO es la regla
+
+La pisada no ocurre porque la app este abierta a las 19:00. Ocurre cuando
+TimeBillingX vuelve a empujar una hora DESPUES de que la glosa se escribio,
+tipicamente porque esa hora seguia corriendo: en los dos casos reales la
+duracion cambio despues de la escritura verificada (00:00 a 07:15 y 00:50 a
+01:20). Eran horas que Dominga seguia acumulando.
+
+Por eso pedirle que cierre el cronometro a las 19:00 seria un mal consejo: si
+todavia esta trabajando, perderia el registro del tiempo, que es peor que una
+glosa pisada. Y tampoco serviria: una hora que sigue abierta sera pisada igual
+cuando la cierre.
+
+Lo que si resuelve el problema ya esta en el diseno:
+
+1. La rutina **repasa siempre el dia anterior**, asi que una hora cerrada tarde
+   se redacta al dia siguiente, cuando ya esta quieta.
+2. `armarResumenDia` **detecta la pisada** y la hora vuelve a `trabajos`
+   para reescribirla. Eso es lo que antes no existia y por eso el dano quedaba
+   permanente.
 
 ## Como funciona de verdad (verificado el 26-08-2026)
 
