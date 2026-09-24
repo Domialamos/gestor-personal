@@ -95,8 +95,13 @@ REM "nota --asegurar" comprueba la nota del dia y solo escribe la de fallo si
 REM falta; la ruta de la boveda y el dia en horario de Chile los sabe tb.mjs, no
 REM este archivo. Sale 1 si tuvo que escribirla, y entonces esta corrida es una
 REM corrida fallida: sale 1 para que la tarea de Windows reintente.
+REM Mismo cuidado que con claude: el codigo se guarda en la linea INMEDIATAMENTE
+REM siguiente al call, sin nada entremedio, y se compara como texto. Con
+REM "if errorlevel 1" un crash de node con codigo negativo se colaba como exito
+REM y la corrida decia LISTO. sin haber dejado nota.
 call node tb.mjs nota --asegurar "El agente termino sin error pero no dejo la nota del dia" >> "%LOG%" 2>&1
-if errorlevel 1 (
+set "SALIDA_NOTA=%ERRORLEVEL%"
+if not "%SALIDA_NOTA%"=="0" (
   echo. >> "%LOG%"
   echo *** EL AGENTE SALIO 0 SIN DEJAR NOTA - se escribio la nota de fallo *** >> "%LOG%"
   exit /b 1

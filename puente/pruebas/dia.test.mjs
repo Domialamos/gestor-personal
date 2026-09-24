@@ -38,6 +38,13 @@ test("procesadas_hoy trae la glosa guardada Y el apunte original del registro", 
   assert.equal(r.procesadas_hoy[0].glosa, glosa);
   assert.notEqual(r.procesadas_hoy[0].apunte, r.procesadas_hoy[0].glosa,
     "apunte igual a glosa destruye el unico control de calidad de la nota");
+  assert.deepEqual(r.procesadas_hoy, [{
+    id_trabajo: 623309,
+    duracion: "3:35",
+    cliente_asunto: "BSVV / Actividades Academicas",
+    apunte: "Informe de brechas",
+    glosa,
+  }], "la forma completa importa: duracion alimenta el total de la nota y cliente_asunto cada titulo");
   assert.deepEqual(r.pisadas, []);
   assert.deepEqual(r.divergencias, []);
 });
@@ -83,14 +90,29 @@ test("C1: si TimeBillingX restauro el apunte, la hora vuelve a trabajos con su g
   assert.equal(r.pisadas[0].id_trabajo, 623011);
 });
 
-test("C1: una entrada vieja del registro sin apunte tambien se detecta como pisada", () => {
-  // Las 100 entradas viejas no tienen apunte, asi que no hay con que comparar:
-  // se tratan como pisadas, que es exactamente lo que le paso a #623011.
+test("C1/R1: sin apunte registrado la deriva NO se reescribe, se informa", () => {
+  // Las entradas anteriores a este cambio no tienen apunte, asi que no hay con
+  // que distinguir "TimeBillingX restauro su fila" de "Dominga corrigio a mano".
+  // Tratarlas como pisada le reponia la glosa vieja encima de su correccion y la
+  // nota afirmaba una causa falsa. Sin apunte no se reescribe nada.
   const r = armarResumenDia([hora(623516, "Rev. borrador", { duracion: "1:20" })],
     { "623516": { dia: "2026-09-22", glosa: "Revisión del borrador de contrato." } });
-  assert.equal(r.trabajos.length, 1);
+  assert.deepEqual(r.pisadas, [], "sin apunte no se puede afirmar que fue TimeBillingX");
+  assert.deepEqual(r.trabajos, [], "y por lo tanto no se reescribe nada");
+  assert.equal(r.divergencias.length, 1);
+  assert.match(r.divergencias[0].motivo, /no hay apunte registrado/);
+  assert.equal(r.divergencias[0].glosa_en_timebilling, "Rev. borrador");
+});
+
+test("C1: CON apunte registrado, el apunte de vuelta si es una pisada y se reescribe", () => {
+  // Este es el caso que el discriminador puede afirmar: el texto vivo es
+  // exactamente el apunte que se guardo al escribir, asi que la glosa se perdio.
+  const r = armarResumenDia([hora(623516, "Rev. borrador", { duracion: "1:20" })],
+    { "623516": { dia: "2026-09-22", glosa: "Revisión del borrador de contrato.", apunte: "Rev. borrador" } });
   assert.equal(r.pisadas.length, 1);
-  assert.equal(r.ya_procesadas, 0);
+  assert.equal(r.trabajos.length, 1, "vuelve a trabajos para que el agente la reescriba");
+  assert.equal(r.trabajos[0].glosa_anterior, "Revisión del borrador de contrato.");
+  assert.deepEqual(r.divergencias, []);
 });
 
 test("C1 y C5 juntos: un salto de linea colapsado NO se confunde con una glosa pisada", () => {

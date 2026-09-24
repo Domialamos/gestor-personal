@@ -34,9 +34,10 @@ verificadas en TimeBilling**, no las meramente enviadas.
 ## TimeBillingX pisa la glosa (confirmado el 23-09-2026)
 
 El pendiente de agosto —si la app de escritorio restaura su propia descripcion al
-re-sincronizar— quedo confirmado con dos casos reales: #623011 (21-09) y #623516
-(22-09) estaban en `registro/procesadas.json` con su glosa buena y en TimeBilling
-habia quedado el apunte crudo. En las dos, la duracion cambio DESPUES de la
+re-sincronizar— quedo confirmado con tres casos reales: #621293 (10-09), #623011 (21-09) y
+#623516 (22-09) estaban en `registro/procesadas.json` con su glosa buena y en
+TimeBilling habia quedado el apunte crudo ("Informe de Brchas", "Informe Pampa" y
+"Informfe de brechas y envio de borrador"). En las dos, la duracion cambio DESPUES de la
 escritura verificada (00:00 a 07:15 y 00:50 a 01:20): TimeBillingX re-empujo la
 fila.
 
@@ -44,6 +45,12 @@ Como el registro es de una sola escritura, eso volvia el dano permanente y mudo:
 `armarResumenDia` excluia para siempre de `trabajos` toda hora registrada sin
 volver a mirar su texto. Ahora compara la glosa del registro con el texto vivo
 del listado:
+
+**Ojo con el alcance:** la deteccion solo mira ayer y hoy, porque es lo que el
+agente repasa. Una glosa que se perdio hace semanas —como #621293, del 10-09— no
+la va a recuperar ninguna corrida: hay que repararla a mano. El barrido de los
+logs encuentra solo las que dejaron un `NO COINCIDE`, asi que puede haber mas
+antiguas sin registrar.
 
 - si el texto vivo es el apunte que el registro guardo al escribir, fue
   TimeBillingX: la hora vuelve a `trabajos` con `glosa_anterior` para reponer la
@@ -183,7 +190,7 @@ node tb.mjs dia 2026-09-22         # un dia puntual, sin modificar nada
 `avisar.mjs` intentaba crear una tarea en gestor-personal para avisar de un
 fallo, pero nunca pudo: `SUPABASE_SERVICE_ROLE_KEY` en `../.env.local` tiene
 cargada la clave anon, no la service role, y RLS rechaza la insercion (ver el
-"Pendiente" mas arriba). Por eso la tarea en el gestor jamas se creaba y cada
+"Lo que quedo de eso" mas arriba). Por eso la tarea en el gestor jamas se creaba y cada
 corrida caia siempre al respaldo en la boveda —el archivo `AAAA-MM-DD —
 FALLO.md`. Ese respaldo termino siendo, en la practica, el unico canal que
 funcionaba, y es justo el que Dominga eligio como principal. Con eso claro,

@@ -138,10 +138,15 @@ export function armarResumenDia(todos, procesadas) {
     // es exactamente el apunte que el registro guardo al escribir, fue
     // TimeBillingX restaurando su propia fila: vuelve a "trabajos" para que el
     // agente la reescriba, con la glosa anterior al lado para reponer la misma
-    // en vez de inventar otra. Las entradas viejas del registro no tienen
-    // apunte, asi que no hay con que comparar: se tratan como pisadas, que es lo
-    // que le paso a #623011 y #623516.
-    const esElApunteDeVuelta = reg.apunte === undefined || igual(reg.apunte, t.descripcion);
+    // en vez de inventar otra.
+    //
+    // OJO: si el registro NO trae apunte, esta deriva NO se puede clasificar y
+    // por eso NO se trata como pisada. Las entradas anteriores a este cambio no
+    // lo tienen —el campo nace aqui—, asi que tratarlas como pisada convertia
+    // CUALQUIER edicion a mano de Dominga en "TimeBillingX la restauro", le
+    // reponia la glosa vieja encima de su correccion, y la nota afirmaba una
+    // causa falsa. Sin apunte se cae a divergencia: no se reescribe nada.
+    const esElApunteDeVuelta = reg.apunte !== undefined && igual(reg.apunte, t.descripcion);
     if (esElApunteDeVuelta) {
       trabajos.push({ ...base, apunte: t.descripcion, glosa_anterior: reg.glosa ?? "" });
       pisadas.push({ ...base, glosa_anterior: reg.glosa ?? "" });
@@ -152,7 +157,16 @@ export function armarResumenDia(todos, procesadas) {
     // Dominga a mano). No se reescribe —seria pisarle su propia correccion— y se
     // informa en la nota con el texto que de verdad esta facturado.
     procesadas_hoy.push({ ...base, apunte: reg.apunte ?? APUNTE_SIN_REGISTRO, glosa: t.descripcion });
-    divergencias.push({ ...base, glosa_registrada: reg.glosa ?? "", glosa_en_timebilling: t.descripcion });
+    divergencias.push({
+      ...base,
+      glosa_registrada: reg.glosa ?? "",
+      glosa_en_timebilling: t.descripcion,
+      // Con apunte registrado sabemos que el texto vivo no es ni la glosa ni el
+      // apunte, asi que alguien lo edito. Sin apunte no sabemos quien cambio que.
+      motivo: reg.apunte === undefined
+        ? "la glosa guardada no coincide y no hay apunte registrado para saber quien la cambio"
+        : "el texto en TimeBilling no es ni la glosa guardada ni el apunte: alguien lo edito a mano",
+    });
   }
 
   return { trabajos, cobradas, ya_procesadas: procesadas_hoy.length, procesadas_hoy, pisadas, divergencias };
