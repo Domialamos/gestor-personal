@@ -4,5 +4,5 @@ dia.json
 glosas.json
 perfil/
 registro/
-
-_volcar_tmp.mjs
+_*.mjs
+respaldo/backfill-*.json

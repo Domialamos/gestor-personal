@@ -124,11 +124,18 @@ no supuestos. El porcentaje dice que tan fuerte es cada regla.
   “Preparación de…”, “Reunión de…”. Cuando el trabajo viene de días anteriores,
   “Continuación de…” es su forma habitual. Abrir con “Se …” es minoritario pero
   legítimo (8%): no lo evites a toda costa, solo no lo uses por defecto.
-- **TERMINA DICIENDO PARA QUÉ (57%).** Es el rasgo que más distingue una glosa
-  suya de una genérica, y el que más falta cuando la escribe un modelo:
-  “…para su incorporación al informe”, “…a fin de dejar constancia del acuerdo”,
-  “…con el objeto de facilitar una nueva revisión”. Si tu glosa solo describe lo
-  que se hizo y no para qué servía, está a medias.
+- **Cierra diciendo para qué CUANDO LO SEPAS (57%, no 100%).** Es el rasgo que
+  más distingue una glosa suya de una genérica: “…para su incorporación al
+  informe”, “…a fin de dejar constancia del acuerdo”, “…con el objeto de
+  facilitar una nueva revisión”.
+  **Pero el propósito no se inventa.** Ponlo cuando se desprende del apunte, del
+  documento que se estaba trabajando o del historial del asunto. Si no sabes para
+  qué servía esa hora, **cierra sin propósito**: una glosa honesta y más corta es
+  mejor que una inflada con una finalidad supuesta. Cuatro de cada diez glosas
+  suyas no lo llevan.
+  Señal de que te estás pasando: si el cierre podría pegarse igual en cualquier
+  hora de cualquier asunto (“a fin de avanzar en la operación”, “para continuar
+  con el trabajo encomendado”), no aporta nada y no va.
 - **Nombra a las personas (44%)**: “Revisión, junto a Sebastián Barros, de…”,
   “Respuesta a Rafael Sepúlveda tras…”. Y nombra el cliente, el documento
   concreto y la contraparte cuando consten en el apunte o en las glosas
@@ -143,11 +150,14 @@ no supuestos. El porcentaje dice que tan fuerte es cada regla.
   distingue operaciones dentro de un mismo asunto.
 - Si hubo varias actuaciones, encadénalas (11%): "Asimismo, se…", "Por último,
   se…".
-- **El largo NO es proporcional a la duración.** Medido: para horas de menos de
-  15 minutos su glosa mediana tiene 119 caracteres, y hay una de 0:25 con 320.
-  Una hora corta merece una glosa completa igual; lo que cambia con la duración
-  es cuántas actuaciones distintas hay que encadenar, no el cuidado del texto.
-  **Nunca uses “fue poco rato” como excusa para una glosa de una línea.**
+- **El largo NO es proporcional a la duración, pero tampoco es libre.** Medianas
+  medidas de sus propias glosas, por duración: menos de 15 min, **119**
+  caracteres; 16 a 45 min, **99**; 46 min a 2 h, **144**; 2 a 4 h, **261**.
+  Una hora corta merece una glosa cuidada, no una de una línea. Pero si te sale
+  el triple de la mediana de su tramo, casi seguro estás rellenando: revisa qué
+  parte no aporta información y quítala.
+  Lo que cambia con la duración es cuántas actuaciones distintas hay que
+  encadenar, no cuántos adornos lleva cada una.
 - Corrige ortografía, tildes, mayúsculas y nombres propios. El apellido correcto
   es "Chadwick".
 - Comillas tipográficas “ ”, nunca « ».
